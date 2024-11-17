@@ -1,77 +1,130 @@
 import { Transition } from '@headlessui/react';
-import classNames from 'classnames';
-import React, { PropsWithChildren, useState } from 'react';
+import { InertiaLinkProps, Link } from '@inertiajs/react';
+import {
+    createContext,
+    Dispatch,
+    PropsWithChildren,
+    SetStateAction,
+    useContext,
+    useState,
+} from 'react';
 
-interface Props {
-  align?: string;
-  width?: string | number;
-  contentClasses?: string;
-  renderTrigger(): JSX.Element;
-}
+const DropDownContext = createContext<{
+    open: boolean;
+    setOpen: Dispatch<SetStateAction<boolean>>;
+    toggleOpen: () => void;
+}>({
+    open: false,
+    setOpen: () => {},
+    toggleOpen: () => {},
+});
 
-export default function Dropdown({
-  align = 'right',
-  width = '48',
-  contentClasses = 'py-1 bg-white dark:bg-gray-700',
-  renderTrigger,
-  children,
-}: PropsWithChildren<Props>) {
-  const [open, setOpen] = useState(false);
+const Dropdown = ({ children }: PropsWithChildren) => {
+    const [open, setOpen] = useState(false);
 
-  const widthClass = {
-    '48': 'w-48',
-  }[width.toString()];
+    const toggleOpen = () => {
+        setOpen((previousState) => !previousState);
+    };
 
-  const alignmentClasses = (() => {
-    if (align === 'left') {
-      return 'origin-top-left left-0';
-    } else if (align === 'right') {
-      return 'origin-top-right right-0';
-    } else {
-      return 'origin-top';
-    }
-  })();
+    return (
+        <DropDownContext.Provider value={{ open, setOpen, toggleOpen }}>
+            <div className="relative">{children}</div>
+        </DropDownContext.Provider>
+    );
+};
 
-  return (
-    <div className="relative">
-      <div onClick={() => setOpen(!open)}>{renderTrigger()}</div>
+const Trigger = ({ children }: PropsWithChildren) => {
+    const { open, setOpen, toggleOpen } = useContext(DropDownContext);
 
-      {/* <!-- Full Screen Dropdown Overlay --> */}
-      <div
-        className="fixed inset-0 z-40"
-        style={{ display: open ? 'block' : 'none' }}
-        onClick={() => setOpen(false)}
-      />
+    return (
+        <>
+            <div onClick={toggleOpen}>{children}</div>
 
-      <Transition
-        show={open}
-        enter="transition ease-out duration-200"
-        enterFrom="transform opacity-0 scale-95"
-        enterTo="transform opacity-100 scale-100"
-        leave="transition ease-in duration-75"
-        leaveFrom="transform opacity-100 scale-100"
-        leaveTo="transform opacity-0 scale-95"
-      >
-        <div className={'relative z-50'}>
-          <div
-            className={classNames(
-              'absolute mt-2 rounded-md shadow-lg',
-              widthClass,
-              alignmentClasses,
+            {open && (
+                <div
+                    className="fixed inset-0 z-40"
+                    onClick={() => setOpen(false)}
+                ></div>
             )}
-            onClick={() => setOpen(false)}
-          >
-            <div
-              className={classNames(
-                'rounded-md ring-1 ring-black ring-opacity-5',
-                contentClasses,
-              )}
+        </>
+    );
+};
+
+const Content = ({
+    align = 'right',
+    width = '48',
+    contentClasses = 'py-1 bg-white',
+    children,
+}: PropsWithChildren<{
+    align?: 'left' | 'right';
+    width?: '48';
+    contentClasses?: string;
+}>) => {
+    const { open, setOpen } = useContext(DropDownContext);
+
+    let alignmentClasses = 'origin-top';
+
+    if (align === 'left') {
+        alignmentClasses = 'ltr:origin-top-left rtl:origin-top-right start-0';
+    } else if (align === 'right') {
+        alignmentClasses = 'ltr:origin-top-right rtl:origin-top-left end-0';
+    }
+
+    let widthClasses = '';
+
+    if (width === '48') {
+        widthClasses = 'w-48';
+    }
+
+    return (
+        <>
+            <Transition
+                show={open}
+                enter="transition ease-out duration-200"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="transition ease-in duration-75"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
             >
-              {children}
-            </div>
-          </div>
-        </div>
-      </Transition>
-    </div>
-  );
-}
+                <div
+                    className={`absolute z-50 mt-2 rounded-md shadow-lg ${alignmentClasses} ${widthClasses}`}
+                    onClick={() => setOpen(false)}
+                >
+                    <div
+                        className={
+                            `rounded-md ring-1 ring-black ring-opacity-5 ` +
+                            contentClasses
+                        }
+                    >
+                        {children}
+                    </div>
+                </div>
+            </Transition>
+        </>
+    );
+};
+
+const DropdownLink = ({
+    className = '',
+    children,
+    ...props
+}: InertiaLinkProps) => {
+    return (
+        <Link
+            {...props}
+            className={
+                'block w-full px-4 py-2 text-start text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-gray-100 focus:outline-none ' +
+                className
+            }
+        >
+            {children}
+        </Link>
+    );
+};
+
+Dropdown.Trigger = Trigger;
+Dropdown.Content = Content;
+Dropdown.Link = DropdownLink;
+
+export default Dropdown;
