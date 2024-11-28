@@ -9,40 +9,65 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-  /** @use HasFactory<\Database\Factories\UserFactory> */
   use HasFactory, Notifiable;
 
-  /**
-   * The attributes that are mass assignable.
-   *
-   * @var array<int, string>
-   */
-  protected $fillable = [
-    'name',
-    'email',
-    'password',
+  protected $guarded = [
+    'id',
+    'role_id'
   ];
 
-  /**
-   * The attributes that should be hidden for serialization.
-   *
-   * @var array<int, string>
-   */
   protected $hidden = [
     'password',
     'remember_token',
   ];
 
-  /**
-   * Get the attributes that should be cast.
-   *
-   * @return array<string, string>
-   */
   protected function casts(): array
   {
     return [
       'email_verified_at' => 'datetime',
       'password' => 'hashed',
     ];
+  }
+
+  protected $with = ['role'];
+
+  public function role()
+  {
+    return $this->belongsTo(Role::class);
+  }
+
+  public function post()
+  {
+    return $this->hasMany(Post::class, 'user_id');
+  }
+
+  public function comment()
+  {
+    return $this->hasMany(Comment::class, 'user_id');
+  }
+
+  public function like()
+  {
+    return $this->hasMany(Like::class, 'user_id');
+  }
+
+  public function share()
+  {
+    return $this->hasMany(SharePost::class, 'user_id');
+  }
+
+  public function follower()
+  {
+    return $this->hasMany(Relationship::class, 'follower_id');
+  }
+
+  public function following()
+  {
+    return $this->hasMany(Relationship::class, 'following_id');
+  }
+
+  public function user()
+  {
+    return $this->hasMany(Relationship::class, 'user_id');
   }
 }
