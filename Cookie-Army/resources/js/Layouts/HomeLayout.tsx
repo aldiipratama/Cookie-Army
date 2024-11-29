@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useRef, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import PostLightbox from "@/Components/PostLightbox";
 import {
     FiArrowUpCircle,
@@ -10,7 +10,7 @@ import {
 import { cn } from "@/lib/utils";
 import { animateScroll, Button as Btn } from "react-scroll";
 import Navbar from "@/Components/Navbar";
-import { LoadingPost } from "@/Components/Loading";
+import { LoadingPost } from "@/Components/LoadingPost";
 import Spinner from "@/Components/Spinner";
 import { usePage } from "@inertiajs/react";
 import { useFetchPosts } from "@/hooks/features/posts/useFetchPosts";
@@ -255,7 +255,7 @@ Layout.MainContent = () => {
                                                                 <div className="flex flex-col gap-0">
                                                                     <TruncatedText
                                                                         lines={
-                                                                            2
+                                                                            3
                                                                         }
                                                                         className={cn(
                                                                             "text-xs text-muted-foreground"

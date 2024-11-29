@@ -1,8 +1,9 @@
 import { usePage } from "@inertiajs/react";
 import { Button } from "./ui/button";
-import { cn, toPascalCase } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import Image from "./Image";
 import { useRelationships } from "@/hooks/features/relationships/useRelationships";
+import { toPascalCase } from "@/lib/toPascalCase";
 
 const SidebarLeft = () => {
     const { auth } = usePage().props;
@@ -26,7 +27,7 @@ const SidebarLeft = () => {
                             <Image
                                 src={auth.user?.profile_picture}
                                 alt={auth.user?.profile_picture}
-                                className="absolute w-24 h-24 -translate-x-1/2 -translate-y-1/2 border rounded-full cursor-pointer inset-x-1/2"
+                                className="absolute w-24 h-24 -translate-x-1/2 -translate-y-1/2 border rounded-full cursor-pointer inset-x-1/2 bg-accent"
                                 variant="profile"
                             />
                             <div className="flex justify-between mt-1">

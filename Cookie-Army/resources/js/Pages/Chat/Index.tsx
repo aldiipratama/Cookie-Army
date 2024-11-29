@@ -1,5 +1,7 @@
+import Navbar from "@/Components/Navbar";
+
 const Chat = () => {
-    return <div>Chat</div>;
+    return <Navbar />;
 };
 
 export default Chat;

@@ -39,7 +39,7 @@ const Image = ({ className, cursor, variant, size, ...props }: TypeImage) => {
                     <div
                         className={cn(
                             imageVariants({ size, variant }),
-                            "text-wrap border dark:border-background text-xs text-muted-foreground text-center bg-background",
+                            "text-wrap text-xs text-muted-foreground text-center bg-primary/10",
                             className
                         )}
                     >
@@ -52,11 +52,10 @@ const Image = ({ className, cursor, variant, size, ...props }: TypeImage) => {
                     <Skeleton
                         className={cn(
                             imageVariants({ size, variant }),
-                            "bg-background",
                             className
                         )}
                     >
-                        <Spinner size="sm" />
+                        <Spinner size="sm" className="border-foreground" />
                     </Skeleton>
                 </div>
             )}

@@ -8,6 +8,7 @@ import { ThemeProvider } from "./Components/theme-provider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { StrictMode } from "react";
+import { Toaster } from "./Components/ui/toaster";
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -38,6 +39,7 @@ createInertiaApp({
                             position="left"
                             buttonPosition="bottom-left"
                         />
+                        <Toaster />
                     </QueryClientProvider>
                 </ThemeProvider>
             </StrictMode>

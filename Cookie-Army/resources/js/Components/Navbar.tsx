@@ -1,4 +1,4 @@
-import { Link, usePage } from "@inertiajs/react";
+import { Link, router, usePage } from "@inertiajs/react";
 import Search from "./Search";
 import {
     FiBell,
@@ -32,13 +32,13 @@ import {
     DropdownMenuLabel,
     DropdownMenuSeparator,
 } from "./ui/dropdown-menu";
-import { toPascalCase } from "@/lib/utils";
 import Image from "./Image";
+import { toPascalCase } from "@/lib/toPascalCase";
 
 const Navbar = () => {
     const { setTheme } = useTheme();
     const [openMenu, setOpenMenu] = useState(false);
-    const { props } = usePage();
+    const { auth, canLogin, canRegister } = usePage().props;
 
     const handleClickMenuItem = (theme?: Theme) => {
         theme && setTheme(theme);
@@ -47,7 +47,7 @@ const Navbar = () => {
 
     return (
         <header className="sticky top-0 z-[99]">
-            <nav className="grid justify-between grid-cols-12 px-5 py-2 rounded-lg shadow-lg bg-background/70 backdrop-blur-lg">
+            <nav className="grid justify-between grid-cols-12 px-5 py-2 rounded-lg shadow-lg bg-accent/70 backdrop-blur-lg">
                 <div className="flex items-center col-span-3 gap-4">
                     <img
                         src="https://placehold.co/50?text=logo"
@@ -86,7 +86,7 @@ const Navbar = () => {
                 </div>
                 <div className="flex items-center justify-end col-span-3 gap-2 max-md:hidden">
                     <ModeToggle />
-                    {props.auth.user ? (
+                    {auth.user ? (
                         <>
                             <Button variant={"ghost"}>
                                 <FiBell />
@@ -94,8 +94,8 @@ const Navbar = () => {
                             <DropdownMenu>
                                 <DropdownMenuTrigger>
                                     <Image
-                                        src={props.auth?.user.profile_picture}
-                                        alt={props.auth?.user.profile_picture}
+                                        src={auth?.user.profile_picture}
+                                        alt={auth?.user.profile_picture}
                                         variant="profile"
                                     />
                                 </DropdownMenuTrigger>
@@ -105,12 +105,8 @@ const Navbar = () => {
                                     side="top"
                                 >
                                     <DropdownMenuLabel className="text-center">
-                                        {toPascalCase(
-                                            props.auth?.user.first_name
-                                        )}{" "}
-                                        {toPascalCase(
-                                            props.auth?.user.last_name
-                                        )}
+                                        {toPascalCase(auth?.user.first_name)}{" "}
+                                        {toPascalCase(auth?.user.last_name)}
                                     </DropdownMenuLabel>
                                     <DropdownMenuSeparator />
                                     <DropdownMenuItem>
@@ -149,16 +145,22 @@ const Navbar = () => {
                         </>
                     ) : (
                         <>
-                            {props.canLogin && (
-                                <Button variant={"ghost"} asChild>
-                                    <Link href={route("login")}>Login</Link>
+                            {canLogin && (
+                                <Button
+                                    variant={"ghost"}
+                                    onClick={() => router.visit(route("login"))}
+                                >
+                                    Login
                                 </Button>
                             )}
-                            {props.canRegister && (
-                                <Button variant={"ghost"} asChild>
-                                    <Link href={route("register")}>
-                                        Register
-                                    </Link>
+                            {canRegister && (
+                                <Button
+                                    variant={"ghost"}
+                                    onClick={() =>
+                                        router.visit(route("register"))
+                                    }
+                                >
+                                    Register
                                 </Button>
                             )}
                         </>

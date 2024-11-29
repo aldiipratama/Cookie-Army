@@ -28,7 +28,7 @@ class LoginRequest extends FormRequest
     {
         return [
             'email' => ['required', 'string', 'email'],
-            'password' => ['required', 'string'],
+            'password' => ['required', 'min:3', 'string'],
         ];
     }
 
@@ -45,7 +45,7 @@ class LoginRequest extends FormRequest
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
-                'email' => trans('auth.failed'),
+                'error' => 'Email or Password not matched! Please try again!',
             ]);
         }
 
@@ -80,6 +80,16 @@ class LoginRequest extends FormRequest
      */
     public function throttleKey(): string
     {
-        return Str::transliterate(Str::lower($this->string('email')).'|'.$this->ip());
+        return Str::transliterate(Str::lower($this->string('email')) . '|' . $this->ip());
+    }
+
+    public function messages(): array
+    {
+        return [
+            'email.required' => 'Email is not blank, please write your email!',
+            'email.email' => 'Email is invalid, please cek your email is valid!',
+            'password.required' => 'Password is not blank, please write your password!',
+            'password.min' => 'Password at least 3 character for security account'
+        ];
     }
 }

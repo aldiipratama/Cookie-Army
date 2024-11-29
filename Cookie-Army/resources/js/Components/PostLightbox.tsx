@@ -51,20 +51,26 @@ const PostLightbox = ({
                             auth.user && "justify-between"
                         )}
                     >
-                        <div className="flex gap-2 pb-2 border-b border-accent-foreground">
+                        <div className="flex items-center gap-2 pb-2 border-b border-accent-foreground">
                             <div className="flex-1 max-w-max">
                                 <Image
                                     src={imageProfile}
                                     alt={imageProfile}
                                     variant="profile"
+                                    cursor="yes"
                                 />
                             </div>
-                            <div className="flex flex-col flex-1">
+                            <Button
+                                variant={"link"}
+                                className="flex flex-col flex-1 gap-0 p-0 hover:no-underline max-w-max"
+                            >
                                 <span className="text-lg hover:underline">
                                     {nameUser}
                                 </span>
-                                <span className="text-sm">@{userName}</span>
-                            </div>
+                                <span className="text-sm hover:underline">
+                                    @{userName}
+                                </span>
+                            </Button>
                         </div>
                         <div
                             className={cn(
@@ -103,13 +109,19 @@ const PostLightbox = ({
                                                                     userComment?.profile_picture
                                                                 }
                                                                 variant="profile"
+                                                                cursor="yes"
                                                             />
                                                             <div className="flex flex-col">
-                                                                <span className="text-xl font-bold">
+                                                                <Button
+                                                                    variant={
+                                                                        "link"
+                                                                    }
+                                                                    className="p-0 text-xl font-bold max-w-max"
+                                                                >
                                                                     {`${userComment?.first_name} ${userComment?.last_name}`}
-                                                                </span>
+                                                                </Button>
                                                                 <TruncatedText
-                                                                    lines={2}
+                                                                    lines={3}
                                                                     className={cn(
                                                                         "text-xs text-muted-foreground"
                                                                     )}

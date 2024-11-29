@@ -1,6 +1,6 @@
 "use client";
 
-import { HTMLAttributes, ReactNode, useState } from "react";
+import { HTMLAttributes, ReactNode, useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/Components/ui/button";
 
@@ -16,28 +16,37 @@ export function TruncatedText({
     ...props
 }: TruncatedTextProps) {
     const [isExpanded, setIsExpanded] = useState(false);
+    const [showButton, setShowButton] = useState(false);
+    const textRef = useRef<HTMLParagraphElement>(null);
+
+    useEffect(() => {
+        if (textRef.current) {
+            const { scrollHeight, clientHeight } = textRef.current;
+            // Jika scrollHeight lebih besar dari clientHeight, berarti ada lebih banyak teks yang perlu ditampilkan
+            setShowButton(scrollHeight > clientHeight);
+        }
+    }, [children]);
 
     return (
         <div className={cn("space-y-0", className)} {...props}>
             <p
+                ref={textRef}
                 className={cn(
-                    "overflow-hidden",
-                    !isExpanded &&
-                        (lines === 1
-                            ? "text-nowrap overflow-ellipsis whitespace-nowrap"
-                            : `line-clamp-${lines}`)
+                    isExpanded ? "line-clamp-none" : `line-clamp-${lines}`
                 )}
             >
                 {children}
             </p>
-            <Button
-                variant="link"
-                size="sm"
-                className="p-0"
-                onClick={() => setIsExpanded(!isExpanded)}
-            >
-                {isExpanded ? "Show Less" : "Show More"}
-            </Button>
+            {showButton && (
+                <Button
+                    variant="link"
+                    size="sm"
+                    className="p-0"
+                    onClick={() => setIsExpanded(!isExpanded)}
+                >
+                    {isExpanded ? "Show Less" : "Show More"}
+                </Button>
+            )}
         </div>
     );
 }
