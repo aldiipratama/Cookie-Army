@@ -7,7 +7,7 @@ import { faker } from '@faker-js/faker/locale/id_ID'
 
 export default function Stories() {
     return (
-        <div className="flex px-5 py-2 gap-2 border-b sticky top-0">
+        <div className="flex px-5 py-2 gap-2 border-b sticky top-0 bg-background/50 backdrop-blur-2xl z-10">
             <Carousel className="w-full">
                 <CarouselContent>
                     {[...Array(20)].map((_, i) => (

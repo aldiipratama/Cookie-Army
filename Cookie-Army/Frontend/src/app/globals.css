@@ -85,4 +85,10 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+  #showmore a {
+    @apply text-primary/30;
+  }
+  #showmore ~ span {
+    @apply text-primary/30;
+  }
 }
