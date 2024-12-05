@@ -13,10 +13,10 @@ export default function PeopleYouMayKnow() {
                 </Avatar>
                 <div className="flex flex-col">
                     <div className="flex gap-2">
-                        <Button variant={'link'} className="p-0 justify-start h-full">{faker.person.firstName()}</Button>
+                        <Button variant={'link'} className="p-0 justify-start h-full text-foreground">{faker.person.firstName()}</Button>
                         <BadgeCheckIcon className="text-blue-500 size-5" />
                     </div>
-                    <Button variant={'link'} className="text-sm text-slate-500 h-full p-0 justify-start">{faker.person.bio()}</Button>
+                    <Button variant={'link'} className="text-sm text-muted-foreground/50 h-full p-0 justify-start">{faker.person.bio()}</Button>
                 </div>
             </div>
             <div className="flex flex-col px-2 border rounded-lg">
@@ -36,19 +36,19 @@ export default function PeopleYouMayKnow() {
                             </Avatar>
                             <div className="flex flex-col w-full h-full">
                                 <div className="flex gap-2">
-                                    <Button variant={'link'} className="p-0 text-sm justify-start h-full">{faker.person.firstName()}</Button>
+                                    <Button variant={'link'} className="p-0 text-sm justify-start h-full text-foreground">{faker.person.firstName()}</Button>
                                     <BadgeCheckIcon className="text-blue-500 size-5" />
                                 </div>
                                 <Button variant={'link'} className="text-[10px] p-0 text-wrap h-full underline-offset-2 text-start text-slate-500 line-clamp-2">Following by {faker.person.firstName()} + 7 lainnya</Button>
                             </div>
-                            <Button variant={'link'} className="p-0 text-xs">
+                            <Button variant={'default'} className="text-xs px-2 py-1">
                                 + Follow
                             </Button>
                         </div>
                     ))}
                 </div>
             </div>
-            <p className="text-xs text-slate-500 text-center">Copyright &copy; ShareFly from Cookie-Army</p>
+            <p className="text-xs text-muted-foreground/50 text-center">Copyright &copy; ShareFly from Cookie-Army</p>
         </div>
     )
 }

@@ -12,7 +12,7 @@ export default {
   theme: {
   	extend: {
   		container: {
-  			center: true
+  			center: 'true'
   		},
   		colors: {
   			background: 'hsl(var(--background))',

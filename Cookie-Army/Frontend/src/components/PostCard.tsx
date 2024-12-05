@@ -28,7 +28,7 @@ export default function PostCard() {
         <div className="flex px-5 flex-col gap-2 items-center mt-2">
             {
                 [...Array(10)].map((_, i) => (
-                    <Card key={i} className="lg:w-1/2 w-full">
+                    <Card key={i} className="md:w-3/4 lg:w-2/3 xl:w-1/2 w-full">
                         <CardHeader className="flex-row gap-2 items-center justify-start">
                             <Avatar>
                                 <AvatarImage src={'https://picsum.photos/50'} alt="avatar" />
@@ -97,13 +97,13 @@ export default function PostCard() {
                                     <Bookmark />
                                 </Button>
                             </div>
-                            <Button variant={'link'} className="p-0 h-full">
+                            <Button variant={'link'} className="p-0 h-full text-foreground">
                                 500 like
                             </Button>
                         </CardContent>
                         <CardFooter className="p-2 pt-0 flex flex-col space-y-4">
                             <CardDescription className="w-full">
-                                <Button variant={'link'} className="p-0 h-full w-max">
+                                <Button variant={'link'} className="p-0 h-full w-max text-foreground">
                                     {faker.person.middleName()}
                                     <BadgeCheckIcon className="text-blue-500 size-5" />
                                 </Button>
@@ -137,7 +137,7 @@ const CommentInput = () => {
     return (
         <div className="flex flex-col w-full">
             <form className="flex gap-2 relative" onSubmit={handleSubmit}>
-                <Textarea placeholder="Write your commentar..." className="scrollbar-w-1 scrollbar scrollbar-thumb-foreground resize-none" value={comment}
+                <Textarea placeholder="Write your commentar..." className="scrollbar-w-1 scrollbar scrollbar-thumb-foreground resize-none scrollbar-thumb-rounded-lg" value={comment}
                     onChange={(e) => setComment(e.target.value)} />
                 <div className="flex flex-col">
                     <Button variant={'ghost'} type="submit" className="p-0" size={'icon'} disabled={comment.trim().length === 0}>
