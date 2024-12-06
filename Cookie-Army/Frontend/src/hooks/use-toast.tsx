@@ -1,3 +1,5 @@
+'use client'
+
 import { useTheme } from "next-themes";
 import { toast as toastRT, ToastOptions } from "react-toastify";
 

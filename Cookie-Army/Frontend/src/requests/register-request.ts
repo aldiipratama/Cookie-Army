@@ -15,8 +15,9 @@ export const registerFormSchema = z.object({
   }).min(3, 'Username must be at least 3 characters.'),
   email: z.string().email('Email must be a valid email.'),
   password: z.string().min(8, 'Password must be at least 8 characters.'),
-  confirmPassword: z.string()
-}).refine(data => data.password === data.confirmPassword, {
+  password_confirmation: z.string(),
+  role: z.number()
+}).refine(data => data.password === data.password_confirmation, {
   message: "Confirm password don't match with password",
-  path: ['confirmPassword']
+  path: ['password_confirmation']
 })

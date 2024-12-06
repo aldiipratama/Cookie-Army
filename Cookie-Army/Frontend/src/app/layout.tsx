@@ -6,6 +6,7 @@ import TopLoader from "@/components/TopLoader";
 import QueryProvider from "@/components/Providers/QueryProvider";
 import { ToastContainer as Toaster } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { SessionProvider } from "next-auth/react";
 
 const inter = Inter({
   subsets: ['latin'],
@@ -27,13 +28,15 @@ export default function RootLayout({
       <body
         className={`antialiased ${inter.className} scrollbar scrollbar-thumb-foreground scrollbar-w-2 scrollbar-thumb-rounded-lg`}
       >
-        <QueryProvider>
-          <ThemeProvider attribute={'class'} defaultTheme="system" enableSystem>
-            <TopLoader />
-            {children}
-            <Toaster />
-          </ThemeProvider>
-        </QueryProvider>
+        <SessionProvider>
+          <QueryProvider>
+            <ThemeProvider attribute={'class'} defaultTheme="system" enableSystem>
+              <TopLoader />
+              {children}
+              <Toaster />
+            </ThemeProvider>
+          </QueryProvider>
+        </SessionProvider>
       </body>
     </html>
   );

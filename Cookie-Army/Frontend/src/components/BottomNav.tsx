@@ -96,21 +96,21 @@ const BottomNav = () => {
                                     user ? (
                                         <Button variant={'ghost'} className='w-full justify-start'>
                                             <LogOut />
-                                            <Link href="/">
+                                            <Link href="/logout">
                                                 <span className="text-sm">Logout</span>
                                             </Link>
                                         </Button>
                                     ) : (
                                         <div className="flex gap-2">
-                                            <Button variant={'default'} className='w-full justify-start'>
-                                                <LogIn />
+                                            <Button variant={'default'} className='w-full justify-start' asChild>
                                                 <Link href="/login">
+                                                    <LogIn />
                                                     <span className="text-sm">Login</span>
                                                 </Link>
                                             </Button>
-                                            <Button variant={'default'} className='w-full justify-start'>
-                                                <Indent />
+                                            <Button variant={'default'} className='w-full justify-start' asChild>
                                                 <Link href="/register">
+                                                    <Indent />
                                                     <span className="text-sm">Register</span>
                                                 </Link>
                                             </Button>

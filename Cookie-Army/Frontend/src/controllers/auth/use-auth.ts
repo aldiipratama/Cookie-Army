@@ -4,6 +4,7 @@ import { IUser } from "@/model/user"
 import { loginFormSchema } from "@/requests/login-request"
 import { registerFormSchema } from "@/requests/register-request"
 import { useMutation, useQuery } from "@tanstack/react-query"
+import { isAxiosError } from "axios"
 import { useParams } from "next/navigation"
 import { useRouter } from "nextjs-toploader/app"
 import { useEffect } from "react"
@@ -38,7 +39,8 @@ export const useAuth = ({ middleware, redirect }: {
             username,
             email,
             password,
-            confirmPassword
+            password_confirmation,
+            role
         }: z.infer<typeof registerFormSchema>) => {
             try {
                 await csrf()
@@ -48,7 +50,8 @@ export const useAuth = ({ middleware, redirect }: {
                     username,
                     email,
                     password,
-                    confirmPassword
+                    password_confirmation,
+                    role
                 })
             } catch (err) {
                 throw err
@@ -87,11 +90,26 @@ export const useAuth = ({ middleware, redirect }: {
             })
             router.push('/')
         },
-        onError: () => {
-            toast('Login Failed, cek your email and password and try again !', {
-                position: 'top-center',
-                type: 'error'
-            })
+        onError: (err) => {
+            if (isAxiosError(err)) {
+                const errors = err.response?.data;
+                if (errors.username) {
+                    toast(errors.username, {
+                        position: 'top-center',
+                        type: 'error',
+                    });
+                } else {
+                    toast('Login Failed, check your email and password and try again!', {
+                        position: 'top-center',
+                        type: 'error',
+                    });
+                }
+            } else {
+                toast('An unexpected error occurred!', {
+                    position: 'top-center',
+                    type: 'error',
+                });
+            }
         }
     })
 
@@ -196,7 +214,7 @@ export const useAuth = ({ middleware, redirect }: {
         if (middleware === 'guest' && redirect && user) router.push(redirect)
         if (window.location.pathname === '/verify-email' && user?.email_verified_at) router.push(redirect!)
         if (middleware === 'auth' && userError) logoutMutate()
-    }, [middleware, redirect, user, router, userError, logoutMutate])
+    }, [user, userError])
 
     return {
         user,

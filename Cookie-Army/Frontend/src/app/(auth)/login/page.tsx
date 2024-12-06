@@ -18,6 +18,8 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from '@hookform/resolvers/zod'
 import { loginFormSchema } from "@/requests/login-request"
 import { useAuth } from "@/controllers/auth/use-auth"
+import { ModeToggleClick } from "@/components/ui/ModeToggle"
+import ButtonProvider from "@/components/ui/button-provider"
 
 export default function Login() {
     const { loginIsPending, loginMutate } = useAuth({ middleware: 'guest' })
@@ -36,17 +38,20 @@ export default function Login() {
 
     return (
         <div className="flex justify-center items-center h-screen">
-            <Card className="w-2/5 relative">
+            <Card className="md:w-2/5 w-4/5 relative">
                 <Button variant={'ghost'} className="absolute top-2 left-2" asChild>
                     <Link href='/'>
                         <ArrowLeftCircle />
                         Back
                     </Link>
                 </Button>
+                <div className="absolute top-2 right-2">
+                    <ModeToggleClick />
+                </div>
                 <CardContent className="py-5 bg-accent/30 rounded-lg">
                     <div className="flex gap-10 items-center justify-center">
-                        <Image src='https://picsum.photos/150?random=logo' alt="logo" className="rounded-full" width={150} height={150} />
-                        <div className="grid gap-4">
+                        <Image src='https://picsum.photos/150?random=logo' alt="logo" className="rounded-full max-md:hidden" width={150} height={150} />
+                        <div className="grid gap-4 max-md:mt-10">
                             <CardHeader className="p-0">
                                 <CardTitle className="text-2xl">Login</CardTitle>
                                 <CardDescription>
@@ -91,8 +96,19 @@ export default function Login() {
                                             ) : 'Login'
                                         }
                                     </Button>
-                                    <p className="text-center">Dont&apos;t have an account? <Button variant={'link'} className="p-0">Register</Button></p>
                                 </form>
+                                <span className="text-center">or</span>
+                                <div className="grid grid-cols-3 gap-2">
+                                    <ButtonProvider provider="google" />
+                                    <ButtonProvider provider="twitter" />
+                                    <ButtonProvider provider="tiktok" />
+                                </div>
+                                <p className="text-center">
+                                    Dont&apos;t have an account?
+                                    <Button variant={'link'} className="p-0 ms-2">
+                                        <Link href={'/register'}>Register</Link>
+                                    </Button>
+                                </p>
                             </Form>
                         </div>
                     </div>

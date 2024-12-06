@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Home, User, MenuSquare, AlertTriangle, LogOut, ActivitySquare, Search, PlusSquare, FolderClock, Book, MessageSquareIcon, LogIn, Indent, Loader } from 'lucide-react'
+import { Home, User, MenuSquare, AlertTriangle, LogOut, ActivitySquare, Search, PlusSquare, FolderClock, Book, MessageSquareIcon, Loader } from 'lucide-react'
 import { Sidebar, SidebarContent, SidebarHeader, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarProvider, SidebarFooter, SidebarTrigger } from '@/components/ui/sidebar'
 import BottomNav from './BottomNav'
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
@@ -10,10 +10,13 @@ import { Button } from './ui/button'
 import { Label } from './ui/label'
 import { ModeToggleSwitch } from './ui/ModeToggle'
 import { useAuth } from '@/controllers/auth/use-auth'
+import { signOut, useSession } from 'next-auth/react'
 
 const ResponsiveNav = () => {
     const [screenSize, setScreenSize] = useState<'mobile' | 'tablet' | 'desktop'>('mobile')
     const { logoutIsPending, logoutMutate, user } = useAuth({ middleware: 'auth' })
+    const { data: userSession } = useSession()
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         const checkScreenSize = () => {
@@ -34,6 +37,13 @@ const ResponsiveNav = () => {
 
     if (screenSize === 'mobile') {
         return <BottomNav />
+    }
+
+    const handleLogout = async () => {
+        if (user) logoutMutate()
+        setLoading(true)
+        await signOut({ redirectTo: '/login' })
+        setLoading(false)
     }
 
 
@@ -78,7 +88,7 @@ const ResponsiveNav = () => {
                             </SidebarMenuButton>
                         </SidebarMenuItem>
                         {
-                            user && (
+                            (user || userSession?.user) && (
                                 <SidebarMenuItem>
                                     <SidebarMenuButton className='hover:bg-accent' asChild>
                                         <Link href="/">
@@ -106,7 +116,7 @@ const ResponsiveNav = () => {
                             </SidebarMenuButton>
                         </SidebarMenuItem>
                         {
-                            user ? (
+                            (user || userSession?.user) && (
                                 <>
                                     <SidebarMenuItem>
                                         <SidebarMenuButton className='hover:bg-accent' asChild>
@@ -125,26 +135,6 @@ const ResponsiveNav = () => {
                                         </SidebarMenuButton>
                                     </SidebarMenuItem>
                                 </>
-                            ) : (
-                                <>
-                                    <SidebarMenuItem>
-                                        <SidebarMenuButton className='hover:bg-accent' asChild>
-                                            <Link href="/login">
-                                                <LogIn />
-                                                Login
-                                            </Link>
-                                        </SidebarMenuButton>
-                                    </SidebarMenuItem>
-                                    <SidebarMenuItem>
-                                        <SidebarMenuButton className='hover:bg-accent' asChild>
-                                            <Link href="/register">
-                                                <Indent />
-                                                Register
-                                            </Link>
-                                        </SidebarMenuButton>
-                                    </SidebarMenuItem>
-                                </>
-
                             )
                         }
                     </SidebarMenu>
@@ -161,7 +151,7 @@ const ResponsiveNav = () => {
                                 </PopoverTrigger>
                                 <PopoverContent side="right" align="end" className="flex flex-col gap-2 w-48">
                                     {
-                                        user && (
+                                        (user || userSession?.user) && (
                                             <Button variant={'ghost'} className="justify-start">
                                                 <ActivitySquare />
                                                 <span>Your Activity</span>
@@ -179,10 +169,10 @@ const ResponsiveNav = () => {
                                         </Label>
                                     </Button>
                                     {
-                                        user && (
-                                            <Button variant={'ghost'} className="justify-start" onClick={() => logoutMutate()} disabled={logoutIsPending}>
+                                        (user || userSession?.user) && (
+                                            <Button variant={'ghost'} className="justify-start" onClick={handleLogout} disabled={logoutIsPending}>
                                                 {
-                                                    logoutIsPending ? (
+                                                    (logoutIsPending || loading) ? (
                                                         <>
                                                             <Loader className='animate-spin' />
                                                             Loading
