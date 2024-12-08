@@ -1,7 +1,7 @@
 'use client'
 
 import { Avatar } from "@/components/ui/avatar";
-import { useAuth } from "@/controllers/auth/use-auth";
+import { useAuth } from "@/hooks/controllers/auth/use-auth";
 import { Button } from "@/components/ui/button";
 import { faker } from "@faker-js/faker/locale/id_ID";
 import { AvatarImage } from "@radix-ui/react-avatar";
@@ -12,6 +12,7 @@ import { useSession } from "next-auth/react";
 export default function PeopleYouMayKnow() {
     const { user } = useAuth({ middleware: 'guest' })
     const { data: userSession } = useSession()
+    console.log(userSession)
 
     return (
         <div className="px-2 space-y-4">
@@ -20,14 +21,14 @@ export default function PeopleYouMayKnow() {
                     <>
                         <div className="flex gap-2 p-2 border rounded-lg">
                             <Avatar>
-                                <AvatarImage src="https://picsum.photos/50" alt='image' />
+                                <AvatarImage src={userSession?.user?.picture || 'https://placehold.co/50'} alt='image' />
                             </Avatar>
                             <div className="flex flex-col">
                                 <div className="flex gap-2">
-                                    <Button variant={'link'} className="p-0 justify-start h-full text-foreground">{faker.person.firstName()}</Button>
+                                    <Button variant={'link'} className="p-0 justify-start h-full text-foreground">{userSession?.user?.username}</Button>
                                     <BadgeCheckIcon className="text-blue-500 size-5" />
                                 </div>
-                                <Button variant={'link'} className="text-sm text-muted-foreground/50 h-full p-0 justify-start">{faker.person.bio()}</Button>
+                                <Button variant={'link'} className="text-sm text-muted-foreground/50 h-full p-0 justify-start">Your Bio</Button>
                             </div>
                         </div>
                         <div className="flex flex-col px-2 border rounded-lg">

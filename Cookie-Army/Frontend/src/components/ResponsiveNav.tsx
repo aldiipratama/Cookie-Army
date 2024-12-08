@@ -9,7 +9,7 @@ import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
 import { Button } from './ui/button'
 import { Label } from './ui/label'
 import { ModeToggleSwitch } from './ui/ModeToggle'
-import { useAuth } from '@/controllers/auth/use-auth'
+import { useAuth } from '@/hooks/controllers/auth/use-auth'
 import { signOut, useSession } from 'next-auth/react'
 
 const ResponsiveNav = () => {

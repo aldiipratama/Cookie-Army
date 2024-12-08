@@ -4,7 +4,7 @@ import { Sheet, SheetContent, SheetTitle, SheetTrigger } from './ui/sheet'
 import { Separator } from './ui/separator'
 import { ModeToggleSwitch } from './ui/ModeToggle'
 import { Button } from './ui/button'
-import { useAuth } from '@/controllers/auth/use-auth'
+import { useAuth } from '@/hooks/controllers/auth/use-auth'
 
 const BottomNav = () => {
     const { user } = useAuth({ middleware: 'guest' })

@@ -1,2 +1,2 @@
-import { handlers } from "@/controllers/auth/authjs"
+import { handlers } from "@/authjs"
 export const { GET, POST } = handlers

@@ -17,7 +17,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { useForm } from "react-hook-form"
 import { zodResolver } from '@hookform/resolvers/zod'
 import { loginFormSchema } from "@/requests/login-request"
-import { useAuth } from "@/controllers/auth/use-auth"
+import { useAuth } from "@/hooks/controllers/auth/use-auth"
 import { ModeToggleClick } from "@/components/ui/ModeToggle"
 import ButtonProvider from "@/components/ui/button-provider"
 
