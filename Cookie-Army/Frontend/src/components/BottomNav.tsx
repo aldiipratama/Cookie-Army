@@ -1,3 +1,5 @@
+'use client'
+
 import Link from 'next/link'
 import { Home, User, Search, PlusSquare, MenuSquare, FolderClock, Book, LogOut, ActivitySquare, LogIn, Indent } from 'lucide-react'
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from './ui/sheet'
@@ -5,6 +7,7 @@ import { Separator } from './ui/separator'
 import { ModeToggleSwitch } from './ui/ModeToggle'
 import { Button } from './ui/button'
 import { useAuth } from '@/hooks/controllers/auth/use-auth'
+import { Label } from './ui/label'
 
 const BottomNav = () => {
     const { user } = useAuth({ middleware: 'guest' })
@@ -87,10 +90,12 @@ const BottomNav = () => {
                             </div>
                             <SheetTitle>Setting</SheetTitle>
                             <Separator />
-                            <div className="flex-flex-col gap-2">
-                                <Button variant={'ghost'} className='w-full justify-between'>
-                                    <span>Theme Mode</span>
-                                    <ModeToggleSwitch />
+                            <div className="flex flex-col gap-4">
+                                <Button variant={'ghost'} className='w-full justify-between cursor-pointer' asChild>
+                                    <Label htmlFor='theme'>
+                                        <span>Theme Mode</span>
+                                        <ModeToggleSwitch id='theme' />
+                                    </Label>
                                 </Button>
                                 {
                                     user ? (

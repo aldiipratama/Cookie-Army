@@ -1,15 +1,16 @@
 'use client'
 
+import BottomNav from "@/components/BottomNav";
 import PeopleYouMayKnow from "@/components/PeopleYouMayKnow";
 import PostCard from "@/components/PostCard";
-import ResponsiveNav from "@/components/ResponsiveNav";
+import SidebarNav from "@/components/SidebarNav";
 import Stories from "@/components/Stories";
 
 export default function Home() {
   return (
     <main className="bg-background flex flex-col md:flex-row relative">
       <section className="md:w-max">
-        <ResponsiveNav />
+        <SidebarNav />
       </section>
 
       <section className="flex-1 md:w-2/4">
@@ -22,6 +23,8 @@ export default function Home() {
           <PeopleYouMayKnow />
         </div>
       </section>
+
+      <BottomNav />
     </main>
   );
 }
