@@ -17,10 +17,10 @@ class UserSeeder extends Seeder
     User::factory()->recycle([
       Role::all()
     ])->create([
-      'first_name' => 'aldi',
-      'last_name' => 'pratama',
-      'username' => 'alx.dyy',
-      'email' => 'paldi0013@gmail.com',
+      'first_name' => 'yesi',
+      'last_name' => 'dedehidayati',
+      'username' => 'yesi',
+      'email' => 'yesidedehidayati@gmail.com',
       'email_verified_at' => now(),
       'verified' => true,
       'no_telepon' => '085798257393',
