@@ -12,7 +12,6 @@ import { useSession } from "next-auth/react";
 export default function PeopleYouMayKnow() {
     const { user } = useAuth({ middleware: 'guest' })
     const { data: userSession } = useSession()
-    console.log(userSession)
 
     return (
         <div className="px-2 space-y-4">
