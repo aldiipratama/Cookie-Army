@@ -5,6 +5,8 @@ import SidebarNav from "@/components/SidebarNav";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import MessageBubble from "@/components/ui/custom/chat/MessageBubble";
+import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -13,23 +15,52 @@ import { Separator } from "@/components/ui/separator";
 import { Sidebar, SidebarContent, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
+import axios, { csrf } from "@/lib/axios";
+import { pusher } from "@/lib/socket";
 import { faker } from "@faker-js/faker/locale/id_ID";
-import EmojiPicker, { EmojiClickData, Theme } from "emoji-picker-react";
-import { MessageCircle, Phone, Search, Smile, UsersRound, Video } from "lucide-react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import EmojiPicker, { Theme } from "emoji-picker-react";
+import { MessageCircle, Mic, Phone, Plus, Search, Send, Smile, UsersRound, Video } from "lucide-react";
 import { useTheme } from "next-themes";
-import { CSSProperties, useEffect, useRef, useState } from "react";
+import { CSSProperties, useEffect, useRef } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
 export default function Chat() {
   const chatList = Array.from({ length: 20 })
   const containerChatRef = useRef<HTMLDivElement | null>(null)
   const { theme } = useTheme()
-  const [comment, setComment] = useState<string>('')
+  const messageFormSchema = z.object({
+    message: z.string()
+  })
+  const formMessage = useForm<z.infer<typeof messageFormSchema>>({
+    resolver: zodResolver(messageFormSchema),
+    defaultValues: {
+      message: ''
+    }
+  })
 
-  const handleEmojiClick = (emojiData: EmojiClickData) => {
-    setComment(prevComment => prevComment + emojiData.emoji)
+  const onSubmit = async (value: z.infer<typeof messageFormSchema>) => {
+    // formMessage.reset()
+    try {
+      await csrf()
+      await axios.post('chat', {
+        message: value.message
+      }).then(res => console.log(res))
+    } catch (err) {
+      console.log(err)
+    }
   }
 
+  // const handleEmojiClick = (emojiData: EmojiClickData) => {
+  //   setComment(prevComment => prevComment + emojiData.emoji)
+  // }
+
   useEffect(() => {
+    pusher.subscribe('messages').bind('MessageEvent', (data: never) => {
+      console.log(data)
+    })
+
     if (containerChatRef.current)
       containerChatRef.current.scrollTop = containerChatRef.current.scrollHeight
   }, [])
@@ -125,114 +156,65 @@ export default function Chat() {
             </div>
 
             {/* chat content */}
-            <div className="grid h-[85vh] overflow-y-auto px-5 pt-2 pb-5 scrollbar-w-1 scrollbar scrollbar-thumb-foreground resize-none scrollbar-thumb-rounded-lg shadow-[inset_10px_0_15px_-3px_rgb(0_0_0_/_0.1)]" ref={containerChatRef}>
+            <div className="grid h-[85vh] overflow-y-auto px-5 pt-2 pb-6 scrollbar-w-1 scrollbar scrollbar-thumb-foreground resize-none scrollbar-thumb-rounded-lg shadow-[inset_10px_0_15px_-3px_rgb(0_0_0_/_0.1)]" ref={containerChatRef}>
               <div className="flex flex-col justify-end gap-2">
-                <div className="flex gap-2">
-                  <Avatar>
-                    <AvatarImage src='https://picsum.photos/150?random=user-chat1' alt='image' />
-                  </Avatar>
-                  <div className="grid w-1/2 gap-2">
-                    <div className="grid bg-secondary p-2 rounded-lg relative before:content-[''] before:absolute before:top-0 before:-left-1 before:bg-secondary before:w-5 before:h-4 before:skew-x-[32deg] min-w-min max-w-max">
-                      <span className="relative font-bold">John</span>
-                      <p className="dark:text-white/70 text-black/70 font-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. Error, perspiciatis?</p>
-                    </div>
-                    <div className="grid bg-secondary p-2 rounded-lg min-w-min max-w-max">
-                      <span className="text-secondary relative font-bold">John</span>
-                      <p className="dark:text-white/70 text-black/70 font-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi numquam quaerat, debitis consectetur quasi necessitatibus facilis ex magnam esse praesentium.</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex gap-2 justify-end">
-                  <Avatar className="order-2">
-                    <AvatarImage src='https://picsum.photos/150?random=user-chat2' alt='image' />
-                  </Avatar>
-                  <div className="grid w-1/2 gap-2 order-1">
-                    <div className="grid bg-primary p-2 rounded-lg relative before:content-[''] before:absolute before:top-0 before:-right-1 before:bg-primary before:w-5 before:h-4 before:-skew-x-[32deg] min-w-min max-w-max place-self-end">
-                      <span className="text-secondary relative font-bold">Me</span>
-                      <p className="dark:text-black/70 text-white/70 font-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. Error, perspiciatis?</p>
-                    </div>
-                    <div className="grid bg-primary p-2 rounded-lg min-w-min max-w-max place-self-end">
-                      <span className="text-secondary relative font-bold">Me</span>
-                      <p className="dark:text-black/70 text-white/70 font-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi numquam quaerat, debitis consectetur quasi necessitatibus facilis ex magnam esse praesentium.</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex gap-2">
-                  <Avatar>
-                    <AvatarImage src='https://picsum.photos/150?random=user-chat1' alt='image' />
-                  </Avatar>
-                  <div className="grid w-1/2 gap-2">
-                    <div className="grid bg-secondary p-2 rounded-lg relative before:content-[''] before:absolute before:top-0 before:-left-1 before:bg-secondary before:w-5 before:h-4 before:skew-x-[32deg] min-w-min max-w-max">
-                      <span className="relative font-bold">John</span>
-                      <p className="dark:text-white/70 text-black/70 font-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. Error, perspiciatis?</p>
-                    </div>
-                    <div className="grid bg-secondary p-2 rounded-lg min-w-min max-w-max">
-                      <span className="text-secondary relative font-bold">John</span>
-                      <p className="dark:text-white/70 text-black/70 font-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi numquam quaerat, debitis consectetur quasi necessitatibus facilis ex magnam esse praesentium.</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex gap-2 justify-end">
-                  <Avatar className="order-2">
-                    <AvatarImage src='https://picsum.photos/150?random=user-chat2' alt='image' />
-                  </Avatar>
-                  <div className="grid w-1/2 gap-2 order-1">
-                    <div className="grid bg-primary p-2 rounded-lg relative before:content-[''] before:absolute before:top-0 before:-right-1 before:bg-primary before:w-5 before:h-4 before:-skew-x-[32deg] min-w-min max-w-max place-self-end">
-                      <span className="text-secondary relative font-bold">Me</span>
-                      <p className="dark:text-black/70 text-white/70 font-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. Error, perspiciatis?</p>
-                    </div>
-                    <div className="grid bg-primary p-2 rounded-lg min-w-min max-w-max place-self-end">
-                      <span className="text-secondary relative font-bold">Me</span>
-                      <p className="dark:text-black/70 text-white/70 font-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi numquam quaerat, debitis consectetur quasi necessitatibus facilis ex magnam esse praesentium.</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex gap-2">
-                  <Avatar>
-                    <AvatarImage src='https://picsum.photos/150?random=user-chat1' alt='image' />
-                  </Avatar>
-                  <div className="grid w-1/2 gap-2">
-                    <div className="grid bg-secondary p-2 rounded-lg relative before:content-[''] before:absolute before:top-0 before:-left-1 before:bg-secondary before:w-5 before:h-4 before:skew-x-[32deg] min-w-min max-w-max">
-                      <span className="relative font-bold">John</span>
-                      <p className="dark:text-white/70 text-black/70 font-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. Error, perspiciatis?</p>
-                    </div>
-                    <div className="grid bg-secondary p-2 rounded-lg min-w-min max-w-max">
-                      <span className="text-secondary relative font-bold">John</span>
-                      <p className="dark:text-white/70 text-black/70 font-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi numquam quaerat, debitis consectetur quasi necessitatibus facilis ex magnam esse praesentium.</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex gap-2 justify-end">
-                  <Avatar className="order-2">
-                    <AvatarImage src='https://picsum.photos/150?random=user-chat2' alt='image' />
-                  </Avatar>
-                  <div className="grid w-1/2 gap-2 order-1">
-                    <div className="grid bg-primary p-2 rounded-lg relative before:content-[''] before:absolute before:top-0 before:-right-1 before:bg-primary before:w-5 before:h-4 before:-skew-x-[32deg] min-w-min max-w-max place-self-end">
-                      <span className="text-secondary relative font-bold">Me</span>
-                      <p className="dark:text-black/70 text-white/70 font-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. Error, perspiciatis?</p>
-                    </div>
-                    <div className="grid bg-primary p-2 rounded-lg min-w-min max-w-max place-self-end">
-                      <span className="text-secondary relative font-bold">Me</span>
-                      <p className="dark:text-black/70 text-white/70 font-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi numquam quaerat, debitis consectetur quasi necessitatibus facilis ex magnam esse praesentium.</p>
-                    </div>
-                  </div>
-                </div>
+                <MessageBubble
+                  position="left"
+                  text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Error, perspiciatis?"
+                  isFirstMessage={true}
+                />
+                <MessageBubble
+                  position="left"
+                  text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Error, perspiciatis?"
+                  isFirstMessage={false}
+                />
+                <MessageBubble
+                  position="right"
+                  text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Error, perspiciatis?"
+                  isFirstMessage={true}
+                />
+                <MessageBubble
+                  position="right"
+                  text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Error, perspiciatis?"
+                  isFirstMessage={false}
+                />
               </div>
             </div>
-            <div className="flex gap-2 items-center sticky bottom-0 px-4 py-2 bg-background shadow-[0_-10px_15px_-3px_rgb(0_0_0_/_0.1)]">
-              <Textarea placeholder='Type a message...' className="scrollbar-w-1 scrollbar scrollbar-thumb-foreground resize-none scrollbar-thumb-rounded-lg" value={comment}
-                onChange={(e) => setComment(e.target.value)} />
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button variant={'ghost'} size={'icon'}>
-                    <Smile />
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-max p-0 z-[1]">
-                  <EmojiPicker theme={theme === 'dark' ? Theme.DARK : Theme.LIGHT} onEmojiClick={handleEmojiClick} />
-                </PopoverContent>
-              </Popover>
-            </div>
+
+            <Form {...formMessage}>
+              <form className="flex gap-2 items-center sticky bottom-0 px-4 py-2 bg-accent/50 shadow-[0_-10px_15px_-3px_rgb(0_0_0_/_0.1)]" onSubmit={formMessage.handleSubmit(onSubmit)}>
+                <Button variant={'ghost'} size={'icon'}>
+                  <Plus />
+                </Button>
+                <FormField
+                  control={formMessage.control}
+                  name='message'
+                  render={({ field }) => (
+                    <FormItem className="w-full relative">
+                      <Popover>
+                        <PopoverTrigger asChild>
+                          <Button variant={'ghost'} size={'icon'} className="absolute top-5 left-2 hover:bg-muted-foreground/50">
+                            <Smile />
+                          </Button>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-max p-0 z-[1]">
+                          <EmojiPicker theme={theme === 'dark' ? Theme.DARK : Theme.LIGHT} />
+                        </PopoverContent>
+                      </Popover>
+                      <FormControl>
+                        <Textarea placeholder='Type a message...' className="ps-12 bg-accent scrollbar-w-1 scrollbar scrollbar-thumb-foreground resize-none scrollbar-thumb-rounded-lg" {...field} />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+                <Button type="submit" size={'icon'}>
+                  <Send />
+                </Button>
+                <Button variant={'ghost'} size={'icon'}>
+                  <Mic />
+                </Button>
+              </form>
+            </Form>
           </div>
           <Sidebar side="right">
             <SidebarContent>

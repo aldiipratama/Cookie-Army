@@ -7,7 +7,6 @@ import QueryProvider from "@/components/Providers/QueryProvider";
 import { ToastContainer as Toaster } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { SessionProvider } from "next-auth/react";
-import "react-chat-elements/dist/main.css";
 
 const inter = Inter({
   subsets: ['latin'],
