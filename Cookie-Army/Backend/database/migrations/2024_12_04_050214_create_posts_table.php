@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->string('description')->nullable();
             $table->string('image')->nullable();
             $table->string('music')->nullable();
+            $table->foreignId('userId')->constrained('users','id');
             $table->timestamps();
         });
     }
