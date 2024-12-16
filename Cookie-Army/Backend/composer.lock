@@ -1296,6 +1296,7 @@
         },
         {
             "name": "laravel/framework",
+<<<<<<< HEAD
             "version": "v11.35.1",
             "source": {
                 "type": "git",
@@ -1306,6 +1307,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/framework/zipball/dcfa130ede1a6fa4343dc113410963e791ad34fb",
                 "reference": "dcfa130ede1a6fa4343dc113410963e791ad34fb",
+=======
+            "version": "v11.35.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/framework.git",
+                "reference": "f1a7aaa3c1235b7a95ccaa58db90e0cd9d8c3fcc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/f1a7aaa3c1235b7a95ccaa58db90e0cd9d8c3fcc",
+                "reference": "f1a7aaa3c1235b7a95ccaa58db90e0cd9d8c3fcc",
+>>>>>>> origin/backend_ilman
                 "shasum": ""
             },
             "require": {
@@ -1507,7 +1520,11 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
+<<<<<<< HEAD
             "time": "2024-12-12T18:25:58+00:00"
+=======
+            "time": "2024-12-10T16:09:29+00:00"
+>>>>>>> origin/backend_ilman
         },
         {
             "name": "laravel/prompts",
@@ -1569,6 +1586,7 @@
             "time": "2024-11-12T14:59:47+00:00"
         },
         {
+<<<<<<< HEAD
             "name": "laravel/reverb",
             "version": "v1.4.4",
             "source": {
@@ -1660,6 +1678,17 @@
             },
             "dist": {
                 "type": "zip",
+=======
+            "name": "laravel/sanctum",
+            "version": "v4.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/sanctum.git",
+                "reference": "9e069e36d90b1e1f41886efa0fe9800a6b354694"
+            },
+            "dist": {
+                "type": "zip",
+>>>>>>> origin/backend_ilman
                 "url": "https://api.github.com/repos/laravel/sanctum/zipball/9e069e36d90b1e1f41886efa0fe9800a6b354694",
                 "reference": "9e069e36d90b1e1f41886efa0fe9800a6b354694",
                 "shasum": ""
@@ -3925,6 +3954,7 @@
                 "source": "https://github.com/bobthecow/psysh/tree/v0.12.7"
             },
             "time": "2024-12-10T01:58:33+00:00"
+<<<<<<< HEAD
         },
         {
             "name": "pusher/pusher-php-server",
@@ -3986,6 +4016,8 @@
                 "source": "https://github.com/pusher/pusher-http-php/tree/7.2.6"
             },
             "time": "2024-10-18T12:04:31+00:00"
+=======
+>>>>>>> origin/backend_ilman
         },
         {
             "name": "ralouphie/getallheaders",
@@ -7300,6 +7332,7 @@
     "packages-dev": [
         {
             "name": "brianium/paratest",
+<<<<<<< HEAD
             "version": "v7.7.0",
             "source": {
                 "type": "git",
@@ -7310,6 +7343,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/paratestphp/paratest/zipball/4fb3f73bc5a4c3146bac2850af7dc72435a32daf",
                 "reference": "4fb3f73bc5a4c3146bac2850af7dc72435a32daf",
+=======
+            "version": "v7.6.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paratestphp/paratest.git",
+                "reference": "ae3c9f1aeda7daa374c904b35ece8f574f56d176"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/paratestphp/paratest/zipball/ae3c9f1aeda7daa374c904b35ece8f574f56d176",
+                "reference": "ae3c9f1aeda7daa374c904b35ece8f574f56d176",
+>>>>>>> origin/backend_ilman
                 "shasum": ""
             },
             "require": {
@@ -7323,9 +7368,15 @@
                 "phpunit/php-code-coverage": "^11.0.8",
                 "phpunit/php-file-iterator": "^5.1.0",
                 "phpunit/php-timer": "^7.0.1",
+<<<<<<< HEAD
                 "phpunit/phpunit": "^11.5.1",
                 "sebastian/environment": "^7.2.0",
                 "symfony/console": "^6.4.14 || ^7.2.1",
+=======
+                "phpunit/phpunit": "^11.5.0",
+                "sebastian/environment": "^7.2.0",
+                "symfony/console": "^6.4.14 || ^7.2.0",
+>>>>>>> origin/backend_ilman
                 "symfony/process": "^6.4.14 || ^7.2.0"
             },
             "require-dev": {
@@ -7377,7 +7428,11 @@
             ],
             "support": {
                 "issues": "https://github.com/paratestphp/paratest/issues",
+<<<<<<< HEAD
                 "source": "https://github.com/paratestphp/paratest/tree/v7.7.0"
+=======
+                "source": "https://github.com/paratestphp/paratest/tree/v7.6.3"
+>>>>>>> origin/backend_ilman
             },
             "funding": [
                 {
@@ -7389,7 +7444,11 @@
                     "type": "paypal"
                 }
             ],
+<<<<<<< HEAD
             "time": "2024-12-11T14:50:44+00:00"
+=======
+            "time": "2024-12-10T13:59:28+00:00"
+>>>>>>> origin/backend_ilman
         },
         {
             "name": "doctrine/deprecations",
@@ -8251,6 +8310,7 @@
         },
         {
             "name": "pestphp/pest",
+<<<<<<< HEAD
             "version": "v3.7.1",
             "source": {
                 "type": "git",
@@ -8265,17 +8325,41 @@
             },
             "require": {
                 "brianium/paratest": "^7.7.0",
+=======
+            "version": "v3.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pestphp/pest.git",
+                "reference": "9688b83a3d7d0acdda21c01b8aeb933ec9fcd556"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pestphp/pest/zipball/9688b83a3d7d0acdda21c01b8aeb933ec9fcd556",
+                "reference": "9688b83a3d7d0acdda21c01b8aeb933ec9fcd556",
+                "shasum": ""
+            },
+            "require": {
+                "brianium/paratest": "^7.6.2",
+>>>>>>> origin/backend_ilman
                 "nunomaduro/collision": "^8.5.0",
                 "nunomaduro/termwind": "^2.3.0",
                 "pestphp/pest-plugin": "^3.0.0",
                 "pestphp/pest-plugin-arch": "^3.0.0",
                 "pestphp/pest-plugin-mutate": "^3.0.5",
                 "php": "^8.2.0",
+<<<<<<< HEAD
                 "phpunit/phpunit": "^11.5.1"
             },
             "conflict": {
                 "filp/whoops": "<2.16.0",
                 "phpunit/phpunit": ">11.5.1",
+=======
+                "phpunit/phpunit": "^11.5.0"
+            },
+            "conflict": {
+                "filp/whoops": "<2.16.0",
+                "phpunit/phpunit": ">11.5.0",
+>>>>>>> origin/backend_ilman
                 "sebastian/exporter": "<6.0.0",
                 "webmozart/assert": "<1.11.0"
             },
@@ -8347,7 +8431,11 @@
             ],
             "support": {
                 "issues": "https://github.com/pestphp/pest/issues",
+<<<<<<< HEAD
                 "source": "https://github.com/pestphp/pest/tree/v3.7.1"
+=======
+                "source": "https://github.com/pestphp/pest/tree/v3.7.0"
+>>>>>>> origin/backend_ilman
             },
             "funding": [
                 {
@@ -8359,7 +8447,11 @@
                     "type": "github"
                 }
             ],
+<<<<<<< HEAD
             "time": "2024-12-12T11:52:01+00:00"
+=======
+            "time": "2024-12-10T11:54:49+00:00"
+>>>>>>> origin/backend_ilman
         },
         {
             "name": "pestphp/pest-plugin",
@@ -9312,6 +9404,7 @@
         },
         {
             "name": "phpunit/phpunit",
+<<<<<<< HEAD
             "version": "11.5.1",
             "source": {
                 "type": "git",
@@ -9322,6 +9415,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/2b94d4f2450b9869fa64a46fd8a6a41997aef56a",
                 "reference": "2b94d4f2450b9869fa64a46fd8a6a41997aef56a",
+=======
+            "version": "11.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/phpunit.git",
+                "reference": "0569902506a6c0878930b87ea79ec3b50ea563f7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/0569902506a6c0878930b87ea79ec3b50ea563f7",
+                "reference": "0569902506a6c0878930b87ea79ec3b50ea563f7",
+>>>>>>> origin/backend_ilman
                 "shasum": ""
             },
             "require": {
@@ -9393,7 +9498,11 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
+<<<<<<< HEAD
                 "source": "https://github.com/sebastianbergmann/phpunit/tree/11.5.1"
+=======
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.5.0"
+>>>>>>> origin/backend_ilman
             },
             "funding": [
                 {
@@ -9409,7 +9518,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2024-12-11T10:52:48+00:00"
+=======
+            "time": "2024-12-06T05:57:38+00:00"
+>>>>>>> origin/backend_ilman
         },
         {
             "name": "sebastian/cli-parser",

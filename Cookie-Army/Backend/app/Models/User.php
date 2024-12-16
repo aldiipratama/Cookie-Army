@@ -46,7 +46,7 @@ class User extends Authenticatable
 
     public function role()
     {
-        return $this->belongsTo(Role::class);
+        return $this->hasOne(Role::class);
     }
 
     public function hasRole($roleName)
@@ -57,5 +57,10 @@ class User extends Authenticatable
     public function post()
     {
         return $this->hasMany(Post::class);
+    }
+
+    public function stories()
+    {
+        return $this->hasMany(Story::class);
     }
 }
