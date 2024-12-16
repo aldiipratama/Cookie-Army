@@ -17,9 +17,11 @@ export const { auth, handlers } = NextAuth({
       clientSecret: process.env.AUTH_GOOGLE_SECRET,
       profile(profile) {
         let username = profile.email
+
         if (username) {
           username = username.replace(/@gmail\.com$/, "")
         }
+
         return {
           ...profile,
           username,
@@ -75,5 +77,5 @@ export const { auth, handlers } = NextAuth({
       return !!auth
     },
   },
-  debug: process.env.NODE_ENV !== 'production'
+  // debug: process.env.NODE_ENV !== 'production'
 })

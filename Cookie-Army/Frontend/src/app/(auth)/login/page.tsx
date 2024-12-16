@@ -19,7 +19,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { loginFormSchema } from "@/requests/login-request"
 import { useAuth } from "@/hooks/controllers/auth/use-auth"
 import { ModeToggleClick } from "@/components/ui/ModeToggle"
-import ButtonProvider from "@/components/ui/button-provider"
+import ButtonProvider from "@/components/ui/custom/button-provider"
 
 export default function Login() {
     const { loginIsPending, loginMutate } = useAuth({ middleware: 'guest' })

@@ -13,7 +13,7 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { ModeToggleClick } from "@/components/ui/ModeToggle";
-import ButtonProvider from "@/components/ui/button-provider";
+import ButtonProvider from "@/components/ui/custom/button-provider";
 
 export default function Register() {
   const { registerIsPending, registerMutate } = useAuth({ middleware: 'guest' })

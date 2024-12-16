@@ -1,8 +1,8 @@
 import { signIn } from "next-auth/react"
 import { useState } from "react"
-import Loader from "./loader"
+import Loader from "../loader"
 import { Icon } from "@iconify/react/dist/iconify.js"
-import { Button } from "./button"
+import { Button } from "../button"
 
 export default function ButtonProvider({ provider, ...props }: { provider: 'google' | 'twitter' | 'tiktok' }) {
   const [loading, setLoading] = useState(false)

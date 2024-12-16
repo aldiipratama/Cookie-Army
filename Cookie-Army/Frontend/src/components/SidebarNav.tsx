@@ -1,10 +1,9 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import { Home, User, MenuSquare, AlertTriangle, LogOut, ActivitySquare, Search, PlusSquare, FolderClock, Book, MessageSquareIcon, Loader } from 'lucide-react'
 import { Sidebar, SidebarContent, SidebarHeader, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarProvider, SidebarFooter, SidebarTrigger } from '@/components/ui/sidebar'
-import BottomNav from './BottomNav'
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
 import { Button } from './ui/button'
 import { Label } from './ui/label'
@@ -12,32 +11,10 @@ import { ModeToggleSwitch } from './ui/ModeToggle'
 import { useAuth } from '@/hooks/controllers/auth/use-auth'
 import { signOut, useSession } from 'next-auth/react'
 
-const ResponsiveNav = () => {
-    const [screenSize, setScreenSize] = useState<'mobile' | 'tablet' | 'desktop'>('mobile')
+const SidebarNav = () => {
     const { logoutIsPending, logoutMutate, user } = useAuth({ middleware: 'auth' })
     const { data: userSession } = useSession()
     const [loading, setLoading] = useState(false)
-
-    useEffect(() => {
-        const checkScreenSize = () => {
-            if (window.innerWidth < 768) {
-                setScreenSize('mobile')
-            } else if (window.innerWidth < 1024) {
-                setScreenSize('tablet')
-            } else {
-                setScreenSize('desktop')
-            }
-        }
-
-        checkScreenSize()
-        window.addEventListener('resize', checkScreenSize)
-
-        return () => window.removeEventListener('resize', checkScreenSize)
-    }, [])
-
-    if (screenSize === 'mobile') {
-        return <BottomNav />
-    }
 
     const handleLogout = async () => {
         if (user) logoutMutate()
@@ -48,7 +25,7 @@ const ResponsiveNav = () => {
 
 
     return (
-        <SidebarProvider className='w-max'>
+        <SidebarProvider className='w-max hidden md:block'>
             <Sidebar className="hidden md:flex" collapsible='icon'>
                 <SidebarHeader>
                     <SidebarMenu>
@@ -197,5 +174,5 @@ const ResponsiveNav = () => {
     )
 }
 
-export default ResponsiveNav
+export default SidebarNav
 
