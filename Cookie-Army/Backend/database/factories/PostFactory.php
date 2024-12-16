@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,7 +20,8 @@ class PostFactory extends Factory
         return [
             'description' => fake()->realTextBetween(),
             'image' => 'https://picsum.photos/150?random=post',
-            'music' => fake()->sentence(2)
+            'music' => fake()->sentence(2),
+            'userId'=> User::factory()
         ];
     }
 }

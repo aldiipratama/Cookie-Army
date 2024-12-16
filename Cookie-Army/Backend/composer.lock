@@ -1297,6 +1297,7 @@
         {
             "name": "laravel/framework",
 <<<<<<< HEAD
+<<<<<<< HEAD
             "version": "v11.35.1",
             "source": {
                 "type": "git",
@@ -1319,6 +1320,18 @@
                 "url": "https://api.github.com/repos/laravel/framework/zipball/f1a7aaa3c1235b7a95ccaa58db90e0cd9d8c3fcc",
                 "reference": "f1a7aaa3c1235b7a95ccaa58db90e0cd9d8c3fcc",
 >>>>>>> origin/backend_ilman
+=======
+            "version": "v11.35.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/framework.git",
+                "reference": "f1a7aaa3c1235b7a95ccaa58db90e0cd9d8c3fcc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/f1a7aaa3c1235b7a95ccaa58db90e0cd9d8c3fcc",
+                "reference": "f1a7aaa3c1235b7a95ccaa58db90e0cd9d8c3fcc",
+>>>>>>> 2a1f5d0e5456ee723c55fcd25453c419bdc5e5b5
                 "shasum": ""
             },
             "require": {
@@ -1521,10 +1534,14 @@
                 "source": "https://github.com/laravel/framework"
             },
 <<<<<<< HEAD
+<<<<<<< HEAD
             "time": "2024-12-12T18:25:58+00:00"
 =======
             "time": "2024-12-10T16:09:29+00:00"
 >>>>>>> origin/backend_ilman
+=======
+            "time": "2024-12-10T16:09:29+00:00"
+>>>>>>> 2a1f5d0e5456ee723c55fcd25453c419bdc5e5b5
         },
         {
             "name": "laravel/prompts",
@@ -1586,6 +1603,7 @@
             "time": "2024-11-12T14:59:47+00:00"
         },
         {
+<<<<<<< HEAD
 <<<<<<< HEAD
             "name": "laravel/reverb",
             "version": "v1.4.4",
@@ -1689,6 +1707,17 @@
             "dist": {
                 "type": "zip",
 >>>>>>> origin/backend_ilman
+=======
+            "name": "laravel/sanctum",
+            "version": "v4.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/sanctum.git",
+                "reference": "9e069e36d90b1e1f41886efa0fe9800a6b354694"
+            },
+            "dist": {
+                "type": "zip",
+>>>>>>> 2a1f5d0e5456ee723c55fcd25453c419bdc5e5b5
                 "url": "https://api.github.com/repos/laravel/sanctum/zipball/9e069e36d90b1e1f41886efa0fe9800a6b354694",
                 "reference": "9e069e36d90b1e1f41886efa0fe9800a6b354694",
                 "shasum": ""
@@ -3955,6 +3984,7 @@
             },
             "time": "2024-12-10T01:58:33+00:00"
 <<<<<<< HEAD
+<<<<<<< HEAD
         },
         {
             "name": "pusher/pusher-php-server",
@@ -4018,6 +4048,8 @@
             "time": "2024-10-18T12:04:31+00:00"
 =======
 >>>>>>> origin/backend_ilman
+=======
+>>>>>>> 2a1f5d0e5456ee723c55fcd25453c419bdc5e5b5
         },
         {
             "name": "ralouphie/getallheaders",
@@ -7333,6 +7365,7 @@
         {
             "name": "brianium/paratest",
 <<<<<<< HEAD
+<<<<<<< HEAD
             "version": "v7.7.0",
             "source": {
                 "type": "git",
@@ -7355,6 +7388,18 @@
                 "url": "https://api.github.com/repos/paratestphp/paratest/zipball/ae3c9f1aeda7daa374c904b35ece8f574f56d176",
                 "reference": "ae3c9f1aeda7daa374c904b35ece8f574f56d176",
 >>>>>>> origin/backend_ilman
+=======
+            "version": "v7.6.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paratestphp/paratest.git",
+                "reference": "ae3c9f1aeda7daa374c904b35ece8f574f56d176"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/paratestphp/paratest/zipball/ae3c9f1aeda7daa374c904b35ece8f574f56d176",
+                "reference": "ae3c9f1aeda7daa374c904b35ece8f574f56d176",
+>>>>>>> 2a1f5d0e5456ee723c55fcd25453c419bdc5e5b5
                 "shasum": ""
             },
             "require": {
@@ -7369,6 +7414,7 @@
                 "phpunit/php-file-iterator": "^5.1.0",
                 "phpunit/php-timer": "^7.0.1",
 <<<<<<< HEAD
+<<<<<<< HEAD
                 "phpunit/phpunit": "^11.5.1",
                 "sebastian/environment": "^7.2.0",
                 "symfony/console": "^6.4.14 || ^7.2.1",
@@ -7377,6 +7423,11 @@
                 "sebastian/environment": "^7.2.0",
                 "symfony/console": "^6.4.14 || ^7.2.0",
 >>>>>>> origin/backend_ilman
+=======
+                "phpunit/phpunit": "^11.5.0",
+                "sebastian/environment": "^7.2.0",
+                "symfony/console": "^6.4.14 || ^7.2.0",
+>>>>>>> 2a1f5d0e5456ee723c55fcd25453c419bdc5e5b5
                 "symfony/process": "^6.4.14 || ^7.2.0"
             },
             "require-dev": {
@@ -7429,10 +7480,14 @@
             "support": {
                 "issues": "https://github.com/paratestphp/paratest/issues",
 <<<<<<< HEAD
+<<<<<<< HEAD
                 "source": "https://github.com/paratestphp/paratest/tree/v7.7.0"
 =======
                 "source": "https://github.com/paratestphp/paratest/tree/v7.6.3"
 >>>>>>> origin/backend_ilman
+=======
+                "source": "https://github.com/paratestphp/paratest/tree/v7.6.3"
+>>>>>>> 2a1f5d0e5456ee723c55fcd25453c419bdc5e5b5
             },
             "funding": [
                 {
@@ -7445,10 +7500,14 @@
                 }
             ],
 <<<<<<< HEAD
+<<<<<<< HEAD
             "time": "2024-12-11T14:50:44+00:00"
 =======
             "time": "2024-12-10T13:59:28+00:00"
 >>>>>>> origin/backend_ilman
+=======
+            "time": "2024-12-10T13:59:28+00:00"
+>>>>>>> 2a1f5d0e5456ee723c55fcd25453c419bdc5e5b5
         },
         {
             "name": "doctrine/deprecations",
@@ -8311,6 +8370,7 @@
         {
             "name": "pestphp/pest",
 <<<<<<< HEAD
+<<<<<<< HEAD
             "version": "v3.7.1",
             "source": {
                 "type": "git",
@@ -8341,12 +8401,29 @@
             "require": {
                 "brianium/paratest": "^7.6.2",
 >>>>>>> origin/backend_ilman
+=======
+            "version": "v3.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pestphp/pest.git",
+                "reference": "9688b83a3d7d0acdda21c01b8aeb933ec9fcd556"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pestphp/pest/zipball/9688b83a3d7d0acdda21c01b8aeb933ec9fcd556",
+                "reference": "9688b83a3d7d0acdda21c01b8aeb933ec9fcd556",
+                "shasum": ""
+            },
+            "require": {
+                "brianium/paratest": "^7.6.2",
+>>>>>>> 2a1f5d0e5456ee723c55fcd25453c419bdc5e5b5
                 "nunomaduro/collision": "^8.5.0",
                 "nunomaduro/termwind": "^2.3.0",
                 "pestphp/pest-plugin": "^3.0.0",
                 "pestphp/pest-plugin-arch": "^3.0.0",
                 "pestphp/pest-plugin-mutate": "^3.0.5",
                 "php": "^8.2.0",
+<<<<<<< HEAD
 <<<<<<< HEAD
                 "phpunit/phpunit": "^11.5.1"
             },
@@ -8360,6 +8437,13 @@
                 "filp/whoops": "<2.16.0",
                 "phpunit/phpunit": ">11.5.0",
 >>>>>>> origin/backend_ilman
+=======
+                "phpunit/phpunit": "^11.5.0"
+            },
+            "conflict": {
+                "filp/whoops": "<2.16.0",
+                "phpunit/phpunit": ">11.5.0",
+>>>>>>> 2a1f5d0e5456ee723c55fcd25453c419bdc5e5b5
                 "sebastian/exporter": "<6.0.0",
                 "webmozart/assert": "<1.11.0"
             },
@@ -8432,10 +8516,14 @@
             "support": {
                 "issues": "https://github.com/pestphp/pest/issues",
 <<<<<<< HEAD
+<<<<<<< HEAD
                 "source": "https://github.com/pestphp/pest/tree/v3.7.1"
 =======
                 "source": "https://github.com/pestphp/pest/tree/v3.7.0"
 >>>>>>> origin/backend_ilman
+=======
+                "source": "https://github.com/pestphp/pest/tree/v3.7.0"
+>>>>>>> 2a1f5d0e5456ee723c55fcd25453c419bdc5e5b5
             },
             "funding": [
                 {
@@ -8448,10 +8536,14 @@
                 }
             ],
 <<<<<<< HEAD
+<<<<<<< HEAD
             "time": "2024-12-12T11:52:01+00:00"
 =======
             "time": "2024-12-10T11:54:49+00:00"
 >>>>>>> origin/backend_ilman
+=======
+            "time": "2024-12-10T11:54:49+00:00"
+>>>>>>> 2a1f5d0e5456ee723c55fcd25453c419bdc5e5b5
         },
         {
             "name": "pestphp/pest-plugin",
@@ -9405,6 +9497,7 @@
         {
             "name": "phpunit/phpunit",
 <<<<<<< HEAD
+<<<<<<< HEAD
             "version": "11.5.1",
             "source": {
                 "type": "git",
@@ -9427,6 +9520,18 @@
                 "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/0569902506a6c0878930b87ea79ec3b50ea563f7",
                 "reference": "0569902506a6c0878930b87ea79ec3b50ea563f7",
 >>>>>>> origin/backend_ilman
+=======
+            "version": "11.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/phpunit.git",
+                "reference": "0569902506a6c0878930b87ea79ec3b50ea563f7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/0569902506a6c0878930b87ea79ec3b50ea563f7",
+                "reference": "0569902506a6c0878930b87ea79ec3b50ea563f7",
+>>>>>>> 2a1f5d0e5456ee723c55fcd25453c419bdc5e5b5
                 "shasum": ""
             },
             "require": {
@@ -9499,10 +9604,14 @@
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
 <<<<<<< HEAD
+<<<<<<< HEAD
                 "source": "https://github.com/sebastianbergmann/phpunit/tree/11.5.1"
 =======
                 "source": "https://github.com/sebastianbergmann/phpunit/tree/11.5.0"
 >>>>>>> origin/backend_ilman
+=======
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.5.0"
+>>>>>>> 2a1f5d0e5456ee723c55fcd25453c419bdc5e5b5
             },
             "funding": [
                 {
@@ -9519,10 +9628,14 @@
                 }
             ],
 <<<<<<< HEAD
+<<<<<<< HEAD
             "time": "2024-12-11T10:52:48+00:00"
 =======
             "time": "2024-12-06T05:57:38+00:00"
 >>>>>>> origin/backend_ilman
+=======
+            "time": "2024-12-06T05:57:38+00:00"
+>>>>>>> 2a1f5d0e5456ee723c55fcd25453c419bdc5e5b5
         },
         {
             "name": "sebastian/cli-parser",
