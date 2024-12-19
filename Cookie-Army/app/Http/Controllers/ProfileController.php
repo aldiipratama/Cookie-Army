@@ -6,8 +6,8 @@ use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -51,12 +51,13 @@ class ProfileController extends Controller
 
         $user = $request->user();
 
-        Auth::logout();
+        auth()->logout();
 
+        $user->connectedAccounts->each->delete();
         $user->delete();
 
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        Session::invalidate();
+        Session::regenerateToken();
 
         return Redirect::to('/');
     }

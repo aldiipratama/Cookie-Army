@@ -4,6 +4,8 @@ import './bootstrap';
 import { createInertiaApp } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { createRoot } from 'react-dom/client';
+import { ThemeProvider } from './components/ThemeProvider';
+import { ToastContainer } from "react-toastify";
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
@@ -11,15 +13,29 @@ createInertiaApp({
     title: (title) => `${title} - ${appName}`,
     resolve: (name) =>
         resolvePageComponent(
-            `./Pages/${name}.tsx`,
-            import.meta.glob('./Pages/**/*.tsx'),
+            `./pages/${name}.tsx`,
+            import.meta.glob('./pages/**/*.tsx'),
         ),
     setup({ el, App, props }) {
         const root = createRoot(el);
 
-        root.render(<App {...props} />);
+        root.render(
+            <ThemeProvider defaultTheme='system' storageKey='vite-ui-theme'>
+                <ToastContainer
+                    position="top-right"
+                    autoClose={1500}
+                    newestOnTop
+                    closeOnClick
+                    pauseOnFocusLoss={false}
+                    draggable
+                    pauseOnHover={false}
+                />
+                <App {...props} />
+            </ThemeProvider>
+        );
     },
     progress: {
         color: '#4B5563',
+        showSpinner: true
     },
 });
