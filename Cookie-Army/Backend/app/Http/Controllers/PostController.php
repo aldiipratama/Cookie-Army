@@ -6,6 +6,7 @@ use App\Http\Requests\PostUpdateRequest;
 use Illuminate\Http\Request;
 use App\Models\Post;
 
+
 class PostController extends Controller
 {
     public function index(Request $request)
@@ -21,11 +22,28 @@ class PostController extends Controller
             ], 404);
         }
 
-
         return response()->json([
             "data" => $post,
             "status_code" => 200
         ], 200);
+    }
+    public function store(Request $request)
+    {
+        $request->validated();
+
+        if ($request->hasFile('image')) {
+            $imageName = time().'.'.$request->image->extension();
+            $request->image->move(public_path('images'), $imageName);
+        }
+
+       $post = Post::create([
+            'music' => $request->music,
+            'image' => $imageName,
+            'description' => $request->description,
+            'user_id' => auth()->user()->id,
+        ]);
+
+        return response()->json(['message' => 'Post created successfully'], 201);
     }
 
     public function show(Request $request)
