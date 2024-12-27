@@ -84,10 +84,10 @@ export default function Home({ canLogin, canRegister }: Props) {
                 <select
                   className="px-4 py-2 text-black bg-yellow-400 rounded cursor-pointer"
                 >
-                  <option value="fiction">Fiction</option>
-                  <option value="non-fiction">Non-Fiction</option>
-                  <option value="mystery">Mystery</option>
-                  <option value="fantasy">Fantasy</option>
+                  <option value="fiction">Fiksi</option>
+                  <option value="non-fiction">Non-Fiksi</option>
+                  <option value="mystery">Filsuf</option>
+                  <option value="fantasy">Fantasi</option>
                 </select>
               </div>
             </div>
