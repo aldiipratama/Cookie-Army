@@ -35,7 +35,6 @@ const BookCard = ({
   </div>
 );
 
-// Komponen Utama
 export default function Home({ canLogin, canRegister }: Props) {
   return (
     <HomeContext.Provider value={{ canLogin, canRegister }}>
@@ -73,8 +72,7 @@ export default function Home({ canLogin, canRegister }: Props) {
               </div>
             </div>
           </section>
-
-          {/* Bagian Recommended */}
+{/* bagian recommended */}
           <section className="space-y-6">
             <div className="flex items-center justify-between">
               <h2 className="text-2xl font-bold text-white">
@@ -115,7 +113,7 @@ export default function Home({ canLogin, canRegister }: Props) {
             </div>
           </section>
 
-          {/* Bagian Top Sellers */}
+          {/* bagian top sellers */}
           <section className="space-y-6">
             <div className="flex items-center justify-between">
               <h2 className="text-2xl font-bold text-white">Top Sellers</h2>

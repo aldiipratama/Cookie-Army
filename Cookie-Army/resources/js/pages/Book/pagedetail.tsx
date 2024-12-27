@@ -78,8 +78,6 @@ export default function Home({ canLogin, canRegister }: Props) {
               Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
             </p>
           </section>
-
-          {/* Bagian You May Also Like */}
           <section className="space-y-6">
             <h2 className="text-xl font-bold text-white">You May Also Like</h2>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-4">
