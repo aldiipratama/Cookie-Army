@@ -26,8 +26,10 @@ Route::middleware('guest')
                     Route::get('login', 'create')
                         ->name('login');
                     Route::post('login', 'store');
-                    Route::get('oauth/{provider}/redirect', 'redirect')->name('auth.redirect');
-                    Route::get('oauth/{provider}/callback', 'callback')->name('auth.callback');
+                    // Route::get('oauth/{provider}/redirect', 'redirect')->name('auth.redirect');
+                    // Route::get('oauth/{provider}/callback', 'callback')->name('auth.callback');
+                    // Route::get('set-password', 'setPassword')->name('auth.set-password');
+                    // Route::post('set-password', 'createPassword')->name('auth.create-password');
                 }
             );
 
