@@ -8,10 +8,12 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Inertia\Response;
 use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Validation\Rules;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -62,69 +64,5 @@ class AuthenticatedSessionController extends Controller
         return Inertia::render('auth/credentials/SetPassword', [
             'message' => 'Please field your password First !',
         ]);
-    }
-
-    public function redirect(string $provider)
-    {
-        return Socialite::driver($provider)->redirect();
-    }
-
-    public function callback(string $provider)
-    {
-        $googleUser = Socialite::with($provider)->user();
-
-        $user = User::where('email', $googleUser->getEmail())->first();
-
-        if ($user) {
-            Auth::login($user);
-        } else {
-            $user = User::create(
-                [
-                    'username' => strstr($googleUser->getEmail(), '@', true),
-                    'email' => $googleUser->getEmail(),
-                    'profile_picture' => $googleUser->getAvatar(),
-                    'password' => null,
-                    'roleId' => 3
-                ]
-            );
-        }
-
-        if (is_null($user->password)) {
-            return redirect()->route('set.password.form');
-        }
-
-        return redirect('/');
-    }
-
-    public function redirect(string $provider)
-    {
-        return Socialite::driver($provider)->redirect();
-    }
-
-    public function callback(string $provider)
-    {
-        $googleUser = Socialite::with($provider)->user();
-
-        $user = User::where('email', $googleUser->getEmail())->first();
-
-        if ($user) {
-            Auth::login($user);
-        } else {
-            $user = User::create(
-                [
-                    'username' => strstr($googleUser->getEmail(), '@', true),
-                    'email' => $googleUser->getEmail(),
-                    'profile_picture' => $googleUser->getAvatar(),
-                    'password' => null,
-                    'roleId' => 3
-                ]
-            );
-        }
-
-        if (is_null($user->password)) {
-            return redirect()->route('set.password.form');
-        }
-
-        return redirect('/');
     }
 }
