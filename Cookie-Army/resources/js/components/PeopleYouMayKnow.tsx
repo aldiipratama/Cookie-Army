@@ -1,13 +1,13 @@
 import { Avatar, AvatarImage } from './ui/avatar'
 import { Button } from './ui/button'
-import { ArrowRightToLine, BadgeCheckIcon, Edit, Indent, LogIn } from 'lucide-react'
+import { ArrowRightToLine, BadgeCheckIcon, Indent, LogIn } from 'lucide-react'
 import { Link, usePage } from '@inertiajs/react'
 import { faker } from '@faker-js/faker'
 import { useHomeContext } from '@/pages/Home'
 
 const PeopleYouMayKnow = () => {
     const { auth } = usePage().props
-    const { canLogin, canRegister } = useHomeContext()
+    const { canLogin, canRegister} = useHomeContext()
 
     return (
         <div className="sticky h-screen px-2">
@@ -15,30 +15,15 @@ const PeopleYouMayKnow = () => {
                 auth.user ? (
                     <>
                         <div className="flex gap-2 p-2 border rounded-lg">
-                            <Avatar className='cursor-pointer'>
+                            <Avatar>
                                 <AvatarImage src={auth.user.profile_picture} alt={auth.user.profile_picture} />
                             </Avatar>
-                            <div className="flex flex-col w-full">
+                            <div className="flex flex-col">
                                 <div className="flex gap-2">
                                     <Button variant={'link'} className="justify-start h-full p-0 text-foreground">{auth.user.username}</Button>
-                                    {
-                                        auth.user.verified_at && (
-                                            <BadgeCheckIcon className="text-blue-500 size-5" />
-                                        )
-                                    }
+                                    <BadgeCheckIcon className="text-blue-500 size-5" />
                                 </div>
-                                {
-                                    auth.user.bio ? (
-                                        <div className="flex items-center justify-between">
-                                            <span className='flex-1 text-sm text-muted-foreground/50 line-clamp-2'>{auth.user.bio}</span>
-                                            <Button size={'icon'} variant={'ghost'} className='text-xs'>
-                                                <Edit />
-                                            </Button>
-                                        </div>
-                                    ) : (
-                                        <Button variant={'link'} className="justify-start h-full p-0 text-sm text-muted-foreground/50">Edit Your Bio</Button>
-                                    )
-                                }
+                                <Button variant={'link'} className="justify-start h-full p-0 text-sm text-muted-foreground/50">Your Bio</Button>
                             </div>
                         </div>
                         <div className="flex flex-col px-2 mt-4 border rounded-lg">

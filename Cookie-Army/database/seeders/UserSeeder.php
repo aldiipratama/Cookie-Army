@@ -15,12 +15,20 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         User::factory()->create([
+<<<<<<< HEAD
             'firstname' => 'admin',
             'lastname' => null,
             'username' => 'admin',
             'email' => 'admin@gmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('admin123'),
+=======
+            'firstname' => 'Aldi',
+            'lastname' => 'Pratama',
+            'username' => 'alxdyy',
+            'email' => 'paldi0013@gmail.com',
+            'email_verified_at' => now(),
+>>>>>>> parent of 56523a9... slicing stories ui
             'no_telepon' => '6285798257393',
             'verified_at' => now(),
             'roleId' => 1

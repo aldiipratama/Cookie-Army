@@ -1,17 +1,17 @@
 import { SVGAttributes } from 'react';
 import Google from './Google';
 import Twitter from './Twitter';
-import { Provider } from '@/types';
+import { ProviderId } from '@/types';
 import Tiktok from './Tiktok';
 
 export default function ProviderIcon({ className = '', provider, ...props }: SVGAttributes<SVGElement> & {
-    provider: Provider
+    provider: ProviderId
 }) {
     const Icon = () => {
-        switch (provider.id) {
+        switch (provider) {
             case 'google':
                 return <Google {...props} className={className} />
-            case 'twitter-oauth-2':
+            case 'twitter':
                 return <Twitter {...props} className={className} />
             case 'tiktok':
                 return <Tiktok {...props} className={className} />

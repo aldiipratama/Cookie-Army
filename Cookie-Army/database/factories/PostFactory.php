@@ -20,7 +20,7 @@ class PostFactory extends Factory
         return [
             'slug' => fake()->slug(),
             'description' => fake()->realText(),
-            'image' => 'https://picsum.photos/640/480?random=image-post'. random_int(1, 100),
+            'image' => 'https://picsum.photos/640/480?random=image-post',
             'userId' => User::factory()
         ];
     }

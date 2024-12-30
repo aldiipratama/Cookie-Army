@@ -16,4 +16,3 @@ Route::middleware(['web'])
     );
 
 require __DIR__ . '/auth.php';
-require __DIR__.'/socialstream.php';

@@ -26,6 +26,11 @@ Route::middleware('guest')
                     Route::get('login', 'create')
                         ->name('login');
                     Route::post('login', 'store');
+<<<<<<< HEAD
+=======
+                    Route::get('oauth/{provider}/redirect', 'redirect')->name('auth.redirect');
+                    Route::get('oauth/{provider}/callback', 'callback')->name('auth.callback');
+>>>>>>> parent of 56523a9... slicing stories ui
                 }
             );
 

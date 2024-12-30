@@ -32,8 +32,9 @@ class UserFactory extends Factory
             'username' => fake()->username(),
             'bio' => fake()->realText(),
             'email' => fake()->unique()->safeEmail(),
-            'profile_picture' => 'https://placehold.co/150?text=no image',
-            'profile_background' => 'https://placehold.co/200x100?text=no image',
+            'email_verified_at' => now(),
+            'profile_picture' => 'https://picsum.photos/150?random=profile-picture',
+            'profile_background' => 'https://picsum.photos/200/100?random=profile-background',
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
             'roleId' => 3
