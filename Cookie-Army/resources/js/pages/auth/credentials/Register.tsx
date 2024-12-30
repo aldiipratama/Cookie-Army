@@ -16,7 +16,11 @@ import { ArrowLeftCircle } from 'lucide-react';
 import { FormEventHandler } from 'react';
 import Socialstream from '@/components/Socialstream';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import Logo from '@/components/icon/Logo';
+=======
+import { Socialstream as SocialstreamType } from '@/types';
+>>>>>>> parent of 56523a9... slicing stories ui
 =======
 import { Socialstream as SocialstreamType } from '@/types';
 >>>>>>> parent of 56523a9... slicing stories ui
@@ -143,8 +147,13 @@ export default function Register({
                                 </p>
                             </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
                             <Link href={route('home')} className='max-md:hidden'>
                             <Logo className='w-40' />
+=======
+                            <Link href={route('home')}>
+                                <img src='https://picsum.photos/150?random=logo' alt="logo" className="rounded-full max-md:hidden" />
+>>>>>>> parent of 56523a9... slicing stories ui
 =======
                             <Link href={route('home')}>
                                 <img src='https://picsum.photos/150?random=logo' alt="logo" className="rounded-full max-md:hidden" />

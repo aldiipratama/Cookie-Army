@@ -16,6 +16,7 @@ class UserSeeder extends Seeder
     {
         User::factory()->create([
 <<<<<<< HEAD
+<<<<<<< HEAD
             'firstname' => 'admin',
             'lastname' => null,
             'username' => 'admin',
@@ -23,11 +24,16 @@ class UserSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('admin123'),
 =======
+=======
+>>>>>>> parent of 56523a9... slicing stories ui
             'firstname' => 'Aldi',
             'lastname' => 'Pratama',
             'username' => 'alxdyy',
             'email' => 'paldi0013@gmail.com',
             'email_verified_at' => now(),
+<<<<<<< HEAD
+>>>>>>> parent of 56523a9... slicing stories ui
+=======
 >>>>>>> parent of 56523a9... slicing stories ui
             'no_telepon' => '6285798257393',
             'verified_at' => now(),

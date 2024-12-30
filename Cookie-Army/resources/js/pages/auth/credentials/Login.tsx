@@ -17,8 +17,11 @@ import { Head, Link, useForm } from '@inertiajs/react';
 import { ArrowLeftCircle } from 'lucide-react';
 import { FormEventHandler } from 'react';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { Socialstream as SocialstreamType } from '@/types';
 import Logo from '@/components/icon/Logo';
+=======
+>>>>>>> parent of 56523a9... slicing stories ui
 =======
 >>>>>>> parent of 56523a9... slicing stories ui
 
@@ -63,8 +66,13 @@ export default function Login({
                     <CardContent className="py-5 rounded-lg bg-accent/30">
                         <div className="flex items-center justify-center gap-10">
 <<<<<<< HEAD
+<<<<<<< HEAD
                             <Link href={route('home')} className='max-md:hidden'>
                                 <Logo className='w-40' />
+=======
+                            <Link href={route('home')}>
+                                <img src='https://picsum.photos/150?random=logo' alt="logo" className="rounded-full max-md:hidden" />
+>>>>>>> parent of 56523a9... slicing stories ui
 =======
                             <Link href={route('home')}>
                                 <img src='https://picsum.photos/150?random=logo' alt="logo" className="rounded-full max-md:hidden" />
