@@ -2,12 +2,12 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-class Anime extends Controller
+class Buku extends Controller
 {
     public function index(){
-        $anime = Http::get('https://jikan.moe/')["message"];
+        $buku = Http::get('https://developers.google.com/books')["message"];
         response()->json([
-            "data" => $anime,
+            "data" => $buku,
             "status_code" => 200
           ], 200);
     }
