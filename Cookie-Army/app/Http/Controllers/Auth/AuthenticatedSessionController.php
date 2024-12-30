@@ -37,6 +37,11 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        if(Auth::user()->roleId === 1)
+        {
+            return redirect()->intended(route('dashboard'));
+        }
+
         return redirect()->intended(route('home', absolute: false));
     }
 
@@ -51,6 +56,13 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/login');
+    }
+
+    public function setPassword()
+    {
+        return Inertia::render('auth/credentials/SetPassword', [
+            'message' => 'Please field your password First !',
+        ]);
     }
 }

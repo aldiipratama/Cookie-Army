@@ -26,10 +26,6 @@ Route::middleware('guest')
                     Route::get('login', 'create')
                         ->name('login');
                     Route::post('login', 'store');
-                    // Route::get('oauth/{provider}/redirect', 'redirect')->name('auth.redirect');
-                    // Route::get('oauth/{provider}/callback', 'callback')->name('auth.callback');
-                    // Route::get('set-password', 'setPassword')->name('auth.set-password');
-                    // Route::post('set-password', 'createPassword')->name('auth.create-password');
                 }
             );
 
@@ -85,12 +81,16 @@ Route::middleware('auth')
 
             Route::put('password', [PasswordController::class, 'update'])->name('password.update');
 
-            Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
-                ->name('logout');
+            Route::controller(AuthenticatedSessionController::class)
+                ->group(function () {
+                    Route::post('logout', 'destroy')->name('logout');
+                    Route::get('set-password', 'setPassword')->name('auth.set-password');
+                    Route::post('set-password', 'createPassword')->name('auth.create-password');
+                });
         }
     );
 
-Route::middleware(['auth', 'verified'])
+Route::middleware(['auth', 'verified', 'admin'])
     ->group(
         function () {
             Route::controller(DashboardController::class)

@@ -36,11 +36,16 @@ class CreateUserFromProvider implements CreatesUserFromProvider
                 'profile_picture' => $providerUser->getAvatar(),
                 'roleId' => 3
             ]), function (User $user) use ($provider, $providerUser) {
+                if(is_null($user->password)){
+                    return redirect()->intended(route('auth.set-password'));
+                }
+                
                 $user->markEmailAsVerified();
 
                 if (Socialstream::hasProviderAvatarsFeature() && $providerUser->getAvatar()) {
                     $user->setProfilePhotoFromUrl($providerUser->getAvatar());
                 }
+
 
                 $this->createsConnectedAccounts->create($user, $provider, $providerUser);
             });

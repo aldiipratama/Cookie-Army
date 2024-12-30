@@ -17,6 +17,7 @@ import { ArrowLeftCircle } from 'lucide-react';
 import { FormEventHandler } from 'react';
 import { Socialstream as SocialstreamType } from '@/types';
 import Socialstream from '@/components/Socialstream';
+import Logo from '@/components/icon/Logo';
 
 export default function Register({ socialstream, errors: { socialstream: socialstreamErrors } }: { socialstream: SocialstreamType, errors: { socialstream?: string } }) {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -134,7 +135,7 @@ export default function Register({ socialstream, errors: { socialstream: socials
                                 </p>
                             </div>
                             <Link href={route('home')} className='max-md:hidden'>
-                                <img src='https://picsum.photos/150?random=logo' alt="logo" className="rounded-full" />
+                            <Logo className='w-40' />
                             </Link>
                         </div>
                     </CardContent>

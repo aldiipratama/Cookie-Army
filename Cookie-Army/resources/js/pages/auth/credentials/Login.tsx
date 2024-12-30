@@ -17,6 +17,7 @@ import { Head, Link, useForm } from '@inertiajs/react';
 import { ArrowLeftCircle } from 'lucide-react';
 import { FormEventHandler } from 'react';
 import { Socialstream as SocialstreamType } from '@/types';
+import Logo from '@/components/icon/Logo';
 
 export default function Login({
     canResetPassword,
@@ -63,7 +64,7 @@ export default function Login({
                     <CardContent className="py-5 rounded-lg bg-accent/30">
                         <div className="flex items-center justify-center gap-10">
                             <Link href={route('home')} className='max-md:hidden'>
-                                <img src='https://picsum.photos/150?random=logo' alt="logo" className="rounded-full" />
+                                <Logo className='w-40' />
                             </Link>
                             <div className="grid gap-4 max-md:mt-10">
                                 <CardHeader className="p-0 mt-4">
