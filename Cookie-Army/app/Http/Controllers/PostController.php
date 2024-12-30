@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PostUpdateRequest;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -41,11 +42,10 @@ class PostController extends Controller
             'music' => $request->music,
             'image' => $imageName,
             'description' => $request->description,
-            'user_id' => auth()->user()->id,
+            'user_id' => Auth::user()->id,
         ]);
 
-        return response()->json(['message' => 'Post created successfully'], 201);
-    }
+        return response()->json(['message' => 'Post created successfully'],201);}
 
     public function show(Request $request)
     {

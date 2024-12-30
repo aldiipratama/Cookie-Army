@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogClose, DialogContent, DialogOverlay, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
-import { faker } from "@faker-js/faker/locale/id_ID";
 import { BadgeCheckIcon, Bookmark, Heart, Loader, MessageCircleMore, MoreHorizontal, Send, SendHorizonal, Smile } from "lucide-react";
 import { Textarea } from "./ui/textarea";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
@@ -13,27 +12,35 @@ import { EmojiClickData, EmojiStyle, Theme } from 'emoji-picker-react';
 import { useTheme } from './ThemeProvider';
 import { ShowMore } from '@re-dev/react-truncate';
 import Loading from './ui/loading';
+import { useHomeContext } from '@/pages/Home';
+import TimeAgo from 'react-timeago'
 const EmojiPicker = lazy(() => import('emoji-picker-react'))
 
 export default function PostCard() {
-    const posts = Array.from({ length: 10 })
+    const { dataPosts } = useHomeContext()
 
     return (
         <div className="flex flex-col items-center gap-2 px-5 mt-2">
             {
-                posts.length > 0 ?
-                    posts.map((_, i) => (
+                dataPosts ?
+                    dataPosts?.data?.map((post, i) => (
                         <Card key={i} className="w-full md:w-3/4 lg:w-2/3 xl:w-1/2">
                             <CardHeader className="flex-row items-center justify-start gap-2">
                                 <Avatar>
-                                    <AvatarImage src={'https://picsum.photos/50'} alt="avatar" />
+                                    <AvatarImage src={post.users.profile_picture} alt={post.users.profile_picture} />
                                 </Avatar>
                                 <CardTitle className="flex items-center gap-2 text-sm">
-                                    {faker.person.middleName()}
-                                    <BadgeCheckIcon className="text-blue-500 size-5" />
+                                    {post.users.username}
+                                    {
+                                        post.users.verified_at && (
+                                            <BadgeCheckIcon className="text-blue-500 size-5" />
+                                        )
+                                    }
                                 </CardTitle>
                                 <Separator orientation="vertical" className="h-5 w-0.5" />
-                                <span className="text-xs">3 day ago</span>
+                                <span className="text-xs">
+                                    <TimeAgo date={post.created_at} />
+                                </span>
                                 <div className="ms-auto">
                                     <Dialog>
                                         <DialogOverlay className="bg-black/[.01]" />
@@ -72,11 +79,11 @@ export default function PostCard() {
                                     </Dialog>
                                 </div>
                             </CardHeader>
-                            <CardContent className="p-2">
+                            <CardContent className="p-2 space-y-2">
                                 <AspectRatio ratio={1 / 1} className="-mt-4">
-                                    <img src={`https://picsum.photos/1024?random=${i}`} alt="image" className="rounded-md" />
+                                    <img src={post.image} alt={post.image} className="h-full rounded-md" />
                                 </AspectRatio>
-                                <div className="flex items-center justify-between -mt-2">
+                                <div className="flex items-center justify-between">
                                     <div className="flex items-center">
                                         <Button variant={'ghost'} size={'icon'}>
                                             <Heart />
@@ -95,17 +102,21 @@ export default function PostCard() {
                                 <Button variant={'link'} className="h-full p-0 text-foreground">
                                     500 like
                                 </Button>
-                            </CardContent>
-                            <CardFooter className="flex flex-col p-2 pt-0 space-y-4">
-                                <CardDescription className="w-full">
+                                <CardDescription className="w-full space-y-2">
                                     <Button variant={'link'} className="h-full p-0 w-max text-foreground">
-                                        {faker.person.middleName()}
-                                        <BadgeCheckIcon className="text-blue-500 size-5" />
+                                        {post.users.username}
+                                        {
+                                            post.users.verified_at && (
+                                                <BadgeCheckIcon className="text-blue-500 size-5" />
+                                            )
+                                        }
                                     </Button>
                                     <ShowMore lines={2} id="showmore" more={'See more'} less={'Less more'}>
-                                        {faker.lorem.paragraph({ min: 3, max: 5 })}
+                                        {post.description}
                                     </ShowMore>
                                 </CardDescription>
+                            </CardContent>
+                            <CardFooter className="flex flex-col p-2 pt-0 space-y-4">
                                 <CommentInput />
                             </CardFooter>
                         </Card>

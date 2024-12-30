@@ -1,3 +1,4 @@
+import ProviderIcon from '@/components/icon/ProviderIcon';
 import { ModeToggleClick } from '@/components/ModeToggle';
 import { Button } from '@/components/ui/button';
 import {
@@ -14,16 +15,11 @@ import { useToast } from '@/hooks/use-toast';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { ArrowLeftCircle } from 'lucide-react';
 import { FormEventHandler } from 'react';
-import Socialstream from '@/components/Socialstream';
 import { Socialstream as SocialstreamType } from '@/types';
+import Socialstream from '@/components/Socialstream';
+import Logo from '@/components/icon/Logo';
 
-export default function Register({
-    socialstream,
-    errors: { socialstream: socialstreamErrors}
-}: {
-    socialstream: SocialstreamType;
-    errors: { socialstream?: string }
-}) {
+export default function Register({ socialstream, errors: { socialstream: socialstreamErrors } }: { socialstream: SocialstreamType, errors: { socialstream?: string } }) {
     const { data, setData, post, processing, errors, reset } = useForm({
         username: '',
         email: '',
@@ -138,8 +134,8 @@ export default function Register({
                                     </Button>
                                 </p>
                             </div>
-                            <Link href={route('home')}>
-                                <img src='https://picsum.photos/150?random=logo' alt="logo" className="rounded-full max-md:hidden" />
+                            <Link href={route('home')} className='max-md:hidden'>
+                            <Logo className='w-40' />
                             </Link>
                         </div>
                     </CardContent>

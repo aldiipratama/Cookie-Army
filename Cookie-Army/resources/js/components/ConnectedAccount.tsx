@@ -8,9 +8,9 @@ export default function ConnectedAccount({ children, provider, connectedAccount 
 }>) {
     return (
         <div>
-            <div className="flex items-center justify-between px-3">
+            <div className="px-3 flex items-center justify-between">
                 <div className="flex items-center">
-                    <ProviderIcon provider={provider} className="w-6 h-6"/>
+                    <ProviderIcon provider={provider} className="h-6 w-6"/>
 
                     <div className="ms-2">
                         <div className="text-sm font-semibold text-gray-600">
