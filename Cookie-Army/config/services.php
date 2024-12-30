@@ -38,31 +38,19 @@ return [
     'google' => [
         'client_id'=> env('GOOGLE_ID'),
         'client_secret' => env('GOOGLE_SECRET'),
-<<<<<<< HEAD
         'redirect' => env('GOOGLE_REDIRECT')
-=======
-        'redirect' => 'http://localhost:8000/oauth/google/callback'
->>>>>>> parent of 56523a9... slicing stories ui
     ],
 
     'twitter' => [
         'client_id'=> env('TWITTER_ID'),
         'client_secret' => env('TWITTER_SECRET'),
-<<<<<<< HEAD
         'redirect' => env('TWITTER_REDIRECT')
-=======
-        'redirect' => 'http://localhost:8000/oauth/twitter/callback'
->>>>>>> parent of 56523a9... slicing stories ui
     ],
 
     'tiktok' => [
         'client_id'=> env('TIKTOK_ID'),
         'client_secret' => env('TIKTOK_SECRET'),
-<<<<<<< HEAD
         'redirect' => env('TIKTOK_REDIRECT')
-=======
-        'redirect' => 'http://localhost:8000/oauth/tiktok/callback'
->>>>>>> parent of 56523a9... slicing stories ui
     ]
 
 ];
