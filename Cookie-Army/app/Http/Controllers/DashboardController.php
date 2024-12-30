@@ -11,7 +11,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return \Inertia\Inertia::render('Dashboard');
+        return \Inertia\Inertia::render('auth/dashboard/index');
     }
 
     /**

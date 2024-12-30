@@ -11,6 +11,7 @@ use JoelButcher\Socialstream\HasConnectedAccounts;
 class User extends Authenticatable
 {
     use HasFactory;
+    use HasConnectedAccounts;
     use Notifiable;
 
     /**
@@ -41,5 +42,20 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'roleId');
+    }
+
+    public function post()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    public function story()
+    {
+        return $this->hasMany(Story::class);
     }
 }

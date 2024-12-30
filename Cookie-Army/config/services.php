@@ -38,19 +38,19 @@ return [
     'google' => [
         'client_id'=> env('GOOGLE_ID'),
         'client_secret' => env('GOOGLE_SECRET'),
-        'redirect' => 'http://localhost:8000/oauth/google/callback'
+        'redirect' => env('GOOGLE_REDIRECT')
     ],
 
     'twitter' => [
         'client_id'=> env('TWITTER_ID'),
         'client_secret' => env('TWITTER_SECRET'),
-        'redirect' => 'http://localhost:8000/oauth/twitter/callback'
+        'redirect' => env('TWITTER_REDIRECT')
     ],
 
     'tiktok' => [
         'client_id'=> env('TIKTOK_ID'),
         'client_secret' => env('TIKTOK_SECRET'),
-        'redirect' => 'http://localhost:8000/oauth/tiktok/callback'
+        'redirect' => env('TIKTOK_REDIRECT')
     ]
 
 ];
