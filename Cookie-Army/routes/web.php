@@ -3,7 +3,7 @@
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('web')
+Route::middleware(['web'])
     ->group(
         function () {
             Route::controller(HomeController::class)
@@ -16,4 +16,3 @@ Route::middleware('web')
     );
 
 require __DIR__ . '/auth.php';
-require __DIR__.'/socialstream.php';
