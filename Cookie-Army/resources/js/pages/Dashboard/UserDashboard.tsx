@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 const Dashboard: React.FC = () => {
     return (
         <div className="dashboard-container">
@@ -15,7 +16,6 @@ const Dashboard: React.FC = () => {
                     <li>Setting</li>
                 </ul>
             </div>
-
             {/* Dashboard Content */}
             <div className="dashboard-content">
                 <h1>Dashboard User</h1>
