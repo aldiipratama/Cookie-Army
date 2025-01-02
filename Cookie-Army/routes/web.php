@@ -24,8 +24,12 @@ Route::middleware(['web'])
         return Inertia\Inertia::render("Profile/Profile");
       });
 
-      Route::get("/DetailProfile", function (){
+    Route::get("/DetailProfile", function (){
         return Inertia\Inertia::render("profile/DetailProfile");
+      });
+
+      Route::get("/UserDashboard", function (){
+        return Inertia\Inertia::render("Dashboard/UserDashboard");
       });
 require __DIR__ . '/auth.php';
 require __DIR__.'/socialstream.php';
