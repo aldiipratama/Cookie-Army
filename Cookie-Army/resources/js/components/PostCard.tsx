@@ -100,7 +100,7 @@ export default function PostCard() {
                                     </Button>
                                 </div>
                                 <Button variant={'link'} className="h-full p-0 text-foreground">
-                                    {post.likes_count} Likes
+                                    {post.likes_count}
                                 </Button>
                                 <CardDescription className="w-full space-y-2">
                                     <Button variant={'link'} className="h-full p-0 w-max text-foreground">
