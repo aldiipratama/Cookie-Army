@@ -44,4 +44,22 @@ class StoryController extends Controller
 
         return response()->json(['message' => 'Post created successfully'], 201);
     }
+    public function show(Request $request)
+    {
+        $story = Story::findOrFail($request->id);
+
+        if (!$story) {
+            return response([
+                "error" => [
+                    "message" => "Data User by Id in Database Not Found!",
+                    "status_code" => 404
+                ]
+            ], 404);
+        }
+
+        return response()->json([
+            'data' => $story,
+            'status_code' => 200
+        ], 200);
+    }
 }
