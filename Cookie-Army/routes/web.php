@@ -16,4 +16,5 @@ Route::middleware(['web'])
     );
 
 require __DIR__ . '/auth.php';
-require __DIR__.'/socialstream.php';
+require __DIR__ . '/socialstream.php';
+Route::get('/pdfs/{filename}', 'PdfController@show')->middleware('auth');
