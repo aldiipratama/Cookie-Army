@@ -10,6 +10,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "barryvdh/laravel-dompdf": "^3.0",
         "inertiajs/inertia-laravel": "^2.0",
         "joelbutcher/socialstream": "^6.2",
         "laravel/framework": "^11.31",
