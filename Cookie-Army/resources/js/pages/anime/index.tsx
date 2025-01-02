@@ -24,10 +24,10 @@ const AnimePage = () => {
 
         {/* Right Side: Anime Details */}
         <div className="col-span-1 md:col-span-9">
-          {/* Title and Status */}
+          {/* judul dan status */}
           <div className="mb-4">
             <h1 className="text-4xl font-bold text-yellow-400">
-              Judul Movie Anime Detail
+              {/* Judul Movie Anime Detail */}
             </h1>
             <p className="mt-2 text-sm text-gray-400">Completed</p>
           </div>
