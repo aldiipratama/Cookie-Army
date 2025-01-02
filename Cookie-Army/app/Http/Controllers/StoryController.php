@@ -62,4 +62,15 @@ class StoryController extends Controller
             'status_code' => 200
         ], 200);
     }
+
+    public function update(StoryUpdateRequest $request, Story $story)
+    {
+        $data = $story->findOrFail($request->id);
+        $data->update($request->validated());
+
+        return response()->json([
+            "data" => $data,
+            "status_code" => 201
+        ], 201);
+    }
 }
