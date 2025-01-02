@@ -1,12 +1,12 @@
 <?php
 
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(['web'])
+Route::middleware(['web', 'check.password'])
     ->group(
         function () {
-            Route::controller(HomeController::class)
+            Route::controller(PostController::class)
                 ->group(
                     function () {
                         Route::get('/', 'index')->name('home');

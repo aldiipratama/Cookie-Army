@@ -6,9 +6,10 @@ import { useToast } from '@/hooks/use-toast';
 import { Head, useForm } from '@inertiajs/react';
 import React, { FormEventHandler, useEffect } from 'react'
 
-const SetPassword = ({ message }: { message: string }) => {
+const SetPassword = ({ message, userId }: { message: string, userId: number }) => {
     const toast = useToast()
-    const { data, setData, post, processing, errors, reset } = useForm({
+    const { data, setData, processing, errors, reset, patch } = useForm({
+        userId,
         password: '',
         password_confirmation: '',
     });
@@ -16,7 +17,7 @@ const SetPassword = ({ message }: { message: string }) => {
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
-        post(route('auth.create-password'), {
+        patch(route('auth.create-password'), {
             onFinish: () => reset('password'),
             onStart: () => toast('Wait for checking LoggedIn!', { type: 'info' }),
             onError: () => toast('Login Failed', { type: 'error' }),
@@ -35,7 +36,7 @@ const SetPassword = ({ message }: { message: string }) => {
     return (
         <>
             <Head title='Set Password' />
-            <div className="flex h-screen justify-center items-center">
+            <div className="flex items-center justify-center h-screen">
                 <Card className='w-96'>
                     <CardHeader>
                         <CardTitle>
@@ -43,6 +44,7 @@ const SetPassword = ({ message }: { message: string }) => {
                         </CardTitle>
                     </CardHeader>
                     <form onSubmit={submit}>
+                        <Input type='hidden' value={data.userId} name='userId' />
                         <CardContent>
                             <div className="grid gap-2">
                                 <Label htmlFor='password'>Password</Label>

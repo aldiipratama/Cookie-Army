@@ -1,9 +1,10 @@
 import { Avatar, AvatarImage } from './ui/avatar'
 import { Button } from './ui/button'
-import { ArrowRightToLine, BadgeCheckIcon, Edit, Indent, LogIn } from 'lucide-react'
+import { BadgeCheckIcon, Indent, LogIn } from 'lucide-react'
 import { Link, usePage } from '@inertiajs/react'
-import { faker } from '@faker-js/faker'
 import { useHomeContext } from '@/pages/Home'
+import { PhotoProvider, PhotoView } from 'react-photo-view';
+import BioEdit from './BioEdit'
 
 const PeopleYouMayKnow = () => {
     const { auth } = usePage().props
@@ -15,9 +16,13 @@ const PeopleYouMayKnow = () => {
                 auth.user ? (
                     <>
                         <div className="flex gap-2 p-2 border rounded-lg">
-                            <Avatar className='cursor-pointer'>
-                                <AvatarImage src={auth.user.profile_picture} alt={auth.user.profile_picture} />
-                            </Avatar>
+                            <PhotoProvider maskOpacity={.75}>
+                                <PhotoView src={auth.user.profile_picture}>
+                                    <Avatar className='cursor-pointer'>
+                                        <AvatarImage src={auth.user.profile_picture} alt={auth.user.profile_picture} />
+                                    </Avatar>
+                                </PhotoView>
+                            </PhotoProvider>
                             <div className="flex flex-col w-full">
                                 <div className="flex gap-2">
                                     <Button variant={'link'} className="justify-start h-full p-0 text-foreground">{auth.user.username}</Button>
@@ -27,21 +32,10 @@ const PeopleYouMayKnow = () => {
                                         )
                                     }
                                 </div>
-                                {
-                                    auth.user.bio ? (
-                                        <div className="flex items-center justify-between">
-                                            <span className='flex-1 text-sm text-muted-foreground/50 line-clamp-2'>{auth.user.bio}</span>
-                                            <Button size={'icon'} variant={'ghost'} className='text-xs'>
-                                                <Edit />
-                                            </Button>
-                                        </div>
-                                    ) : (
-                                        <Button variant={'link'} className="justify-start h-full p-0 text-sm text-muted-foreground/50">Edit Your Bio</Button>
-                                    )
-                                }
+                                <BioEdit />
                             </div>
                         </div>
-                        <div className="flex flex-col px-2 mt-4 border rounded-lg">
+                        {/* <div className="flex flex-col px-2 mt-4 border rounded-lg">
                             <div className="flex items-center justify-between px-2">
                                 <span className="text-sm">
                                     People you may know
@@ -69,7 +63,7 @@ const PeopleYouMayKnow = () => {
                                     </div>
                                 ))}
                             </div>
-                        </div>
+                        </div> */}
                     </>
                 ) : (
                     <div className="flex flex-col gap-2 p-2 border rounded-lg">

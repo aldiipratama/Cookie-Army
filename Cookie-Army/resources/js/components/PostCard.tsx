@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogClose, DialogContent, DialogOverlay, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
-import { BadgeCheckIcon, Bookmark, Heart, Loader, MessageCircleMore, MoreHorizontal, Send, SendHorizonal, Smile } from "lucide-react";
+import { BadgeCheckIcon, Bookmark, Heart, MessageCircleMore, MoreHorizontal, Send, SendHorizonal, Smile } from "lucide-react";
 import { Textarea } from "./ui/textarea";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { EmojiClickData, EmojiStyle, Theme } from 'emoji-picker-react';
@@ -100,7 +100,7 @@ export default function PostCard() {
                                     </Button>
                                 </div>
                                 <Button variant={'link'} className="h-full p-0 text-foreground">
-                                    500 like
+                                    {post.likes_count} Likes
                                 </Button>
                                 <CardDescription className="w-full space-y-2">
                                     <Button variant={'link'} className="h-full p-0 w-max text-foreground">

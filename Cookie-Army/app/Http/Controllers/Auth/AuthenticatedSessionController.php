@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\CreatePasswordRequest;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
@@ -12,8 +13,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Inertia\Response;
-use Laravel\Socialite\Facades\Socialite;
-use Illuminate\Validation\Rules;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -63,6 +62,18 @@ class AuthenticatedSessionController extends Controller
     {
         return Inertia::render('auth/credentials/SetPassword', [
             'message' => 'Please field your password First !',
+            'userId' => Auth::user()->id,
         ]);
+    }
+
+    public function createPassword(CreatePasswordRequest $request)
+    {
+        $validatedData = $request->validated();
+        
+        User::where('id', $request->userId)->update([
+            'password' => Hash::make($validatedData['password']),
+        ]);
+
+        return redirect('/');
     }
 }

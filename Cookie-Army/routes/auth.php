@@ -52,6 +52,8 @@ Route::middleware('auth')
                     function () {
                         Route::get('/', 'index')->name('profile.edit');
                         Route::patch('/', 'update')->name('profile.update');
+                        Route::patch('/bio/edit', 'editBio')->name('edit.bio');
+                        Route::patch('/bio/delete', 'deleteBio')->name('delete.bio');
                         Route::delete('/', 'destroy')->name('profile.destroy');
                     }
                 );
@@ -85,7 +87,7 @@ Route::middleware('auth')
                 ->group(function () {
                     Route::post('logout', 'destroy')->name('logout');
                     Route::get('set-password', 'setPassword')->name('auth.set-password');
-                    Route::post('set-password', 'createPassword')->name('auth.create-password');
+                    Route::patch('set-password', 'createPassword')->name('auth.create-password');
                 });
         }
     );

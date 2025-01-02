@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class Comment extends Model
 {
-    /** @use HasFactory<\Database\Factories\PostFactory> */
+    /** @use HasFactory<\Database\Factories\CommentFactory> */
     use HasFactory;
 
     protected $guarded = ['id'];
@@ -17,13 +17,8 @@ class Post extends Model
         return $this->belongsTo(User::class, 'userId');
     }
 
-    public function comments()
+    public function posts()
     {
-        return $this->hasMany(Comment::class);
-    }
-
-    public function likes()
-    {
-        return $this->hasMany(Like::class, 'postId');
+        return $this->belongsTo(Post::class, 'postId');
     }
 }

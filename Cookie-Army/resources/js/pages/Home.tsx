@@ -3,68 +3,32 @@ import { Head, usePage } from '@inertiajs/react';
 import PostCard from '@/components/PostCard';
 import Stories from '@/components/Stories';
 import AppLayout from '@/layouts/AppLayout';
-import { IPosts, IStories } from '@/types';
+import { IHomeProps } from '@/types';
 
-interface Props {
-  canLogin: boolean;
-  canRegister: boolean;
-  dataPosts?: {
-    current_page?: number;
-    data?: IPosts[];
-    first_page_url?: string;
-    from?: number;
-    last_page?: number;
-    last_page_url?: string;
-    links?: {
-      active?: boolean;
-      label?: string;
-      url?: string;
-    }[];
-    next_page_url?: string;
-    path?: string;
-    per_page?: number;
-    per_page_url?: string;
-    to?: number;
-    total?: number;
-  },
-  dataStories?: {
-    current_page?: number;
-    data?: IStories[];
-    first_page_url?: string;
-    from?: number;
-    last_page?: number;
-    last_page_url?: string;
-    links?: {
-      active?: boolean;
-      label?: string;
-      url?: string;
-    }[];
-    next_page_url?: string;
-    path?: string;
-    per_page?: number;
-    per_page_url?: string;
-    to?: number;
-    total?: number;
-  }
-}
-
-export const HomeContext = createContext<Props>({
+export const HomeContext = createContext<IHomeProps>({
   canLogin: false,
   canRegister: false,
   dataPosts: {},
-  dataStories: {}
+  dataStories: {},
 })
 
 export default function Home({
   canLogin,
   canRegister,
   dataPosts,
-  dataStories
-}: Props) {
+  dataStories,
+}: IHomeProps) {
   const { auth } = usePage().props
 
+  const contextData = {
+    canLogin,
+    canRegister,
+    dataPosts,
+    dataStories,
+  }
+
   return (
-    <HomeContext.Provider value={{ canLogin, canRegister, dataPosts, dataStories }}>
+    <HomeContext.Provider value={contextData}>
       <Head title="Home">
         <link rel="apple-touch-icon-precomposed" sizes="57x57" href="apple-touch-icon-57x57.png" />
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="apple-touch-icon-114x114.png" />

@@ -37,12 +37,33 @@ export interface User {
     updated_at: DateTime;
 }
 
+interface IMeta {
+    current_page?: number;
+      first_page_url?: string;
+      from?: number;
+      last_page?: number;
+      last_page_url?: string;
+      links?: {
+        active?: boolean;
+        label?: string;
+        url?: string;
+      }[];
+      next_page_url?: string;
+      path?: string;
+      per_page?: number;
+      per_page_url?: string;
+      to?: number;
+      total?: number;
+  }
+
 interface IPosts {
+    id: number;
     slug: string;
     description: string;
     image: string
     userId: number
     users: User
+    likes_count: number;
     created_at: DateTime
     updated_at: DateTime
 }
@@ -56,6 +77,35 @@ interface IStories {
     created_at: DateTime
     updated_at: DateTime
 }
+
+interface ILikes {
+    id: number;
+    commentId: number;
+    postId: number;
+    userId: number;
+    created_at: DateTime;
+    updated_at: DateTime;
+}
+
+interface IComments {
+    id: number;
+    description: string;
+    postId: number;
+    userId: number;
+    created_at: DateTime;
+    updated_at: DateTime;
+}
+
+interface IHomeProps {
+    canLogin: boolean;
+    canRegister: boolean;
+    dataPosts?: {
+      data?: IPosts[];
+    } & IMeta,
+    dataStories?: {
+      data?: IStories[];
+    } & IMeta
+  }
 
 export type PageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & {
     auth: {

@@ -6,6 +6,7 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { createRoot } from 'react-dom/client';
 import { ThemeProvider } from './components/ThemeProvider';
 import { ToastContainer } from "react-toastify";
+import 'react-photo-view/dist/react-photo-view.css';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
@@ -35,7 +36,7 @@ createInertiaApp({
         );
     },
     progress: {
-        color: '#4B5563',
+        color: '#e96311',
         showSpinner: true
     },
 });
