@@ -19,5 +19,14 @@ Route::middleware(['web'])
         return Inertia\Inertia::render("anime/index");
         
     });
+
+    Route::get("/Profile", function (){
+        return Inertia\Inertia::render("Profile/Profile");
+      });
+
+      Route::get("/DetailProfile", function (){
+        return Inertia\Inertia::render("profile/DetailProfile");
+      });
 require __DIR__ . '/auth.php';
 require __DIR__.'/socialstream.php';
+
