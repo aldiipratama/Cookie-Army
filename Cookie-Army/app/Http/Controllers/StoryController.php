@@ -74,4 +74,11 @@ class StoryController extends Controller
             "status_code" => 201
         ], 201);
     }
+
+    public function destroy(Story $story)
+    {
+        $story->findOrFail(request()->id)->delete();
+
+        return response()->noContent();
+    }
 }
