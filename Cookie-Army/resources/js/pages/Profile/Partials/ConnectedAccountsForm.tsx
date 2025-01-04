@@ -1,18 +1,13 @@
 import React, {useRef, useState, FormEventHandler, MouseEventHandler, MouseEvent, FormEvent} from 'react';
-import DangerButton from '@/Components/DangerButton';
-import InputError from '@/Components/InputError.jsx';
-import Modal from '@/Components/Modal';
-import ConnectedAccount from '@/Components/ConnectedAccount.jsx';
-import InputLabel from '@/Components/InputLabel.jsx';
-import TextInput from '@/Components/TextInput.jsx';
-import SecondaryButton from '@/Components/SecondaryButton.jsx';
-import {useForm} from '@inertiajs/react';
-import ActionLink from '@/Components/ActionLink.jsx';
+import {Link, useForm} from '@inertiajs/react';
 import {ConnectedAccount as ConnectedAccountType, Provider} from '@/types';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
 export default function ConnectedAccountsForm({ className = '', hasPassword, providers, connectedAccounts }: { className?: string, hasPassword: boolean, providers: Provider[], connectedAccounts: ConnectedAccountType[] }) {
     const [confirmingAccountDeletion, setConfirmingAccountDeletion] = useState<boolean>(false);
-    const passwordInput = useRef<HTMLInputElement>();
+    const passwordInput = useRef<HTMLInputElement | null>(null);
 
     const {
         data,
@@ -70,16 +65,13 @@ export default function ConnectedAccountsForm({ className = '', hasPassword, pro
 
                     return (
                         <React.Fragment key={provider.id}>
-                            <ConnectedAccount provider={provider} connectedAccount={connectedAccount}>
                                 {connectedAccount ?
-                                    (connectedAccounts.length > 1 || hasPassword && <DangerButton onClick={confirmAccountDeletion}>Remove</DangerButton>)
+                                    (connectedAccounts.length > 1 || hasPassword && <Button variant={'destructive'} onClick={confirmAccountDeletion}>Remove</Button>)
                                     : (
-                                        <ActionLink href={route('oauth.redirect', { provider })}>Connect</ActionLink>
+                                        <Link href={route('oauth.redirect', { provider })}>Connect</Link>
                                     )}
-                            </ConnectedAccount>
-
                             {connectedAccount && (
-                                <Modal show={confirmingAccountDeletion} onClose={closeModal}>
+                                <div>
                                     <form onSubmit={(e) => deleteAccount(e, connectedAccount)} className="p-6">
                                         <h2 className="text-lg font-medium text-gray-900">
                                             Are you sure you want to remove this account?
@@ -90,9 +82,9 @@ export default function ConnectedAccountsForm({ className = '', hasPassword, pro
                                         </p>
 
                                         <div className="mt-6">
-                                            <InputLabel htmlFor="password" value="Password" className="sr-only"/>
+                                            <Label htmlFor="password" className="sr-only">Password</Label>
 
-                                            <TextInput
+                                            <Input
                                                 id="password"
                                                 type="password"
                                                 name="password"
@@ -100,22 +92,21 @@ export default function ConnectedAccountsForm({ className = '', hasPassword, pro
                                                 value={data.password}
                                                 onChange={(e) => setData('password', e.target.value)}
                                                 className="mt-1 block w-3/4"
-                                                isFocused
                                                 placeholder="Password"
                                             />
 
-                                            <InputError message={errors.password} className="mt-2"/>
+                                            <span className="mt-2 text-red-500 text-xs">{errors.password}</span>
                                         </div>
 
                                         <div className="mt-6 flex justify-end">
-                                            <SecondaryButton onClick={closeModal}>Cancel</SecondaryButton>
+                                            <Button variant={'secondary'}>Cancel</Button>
 
-                                            <DangerButton className="ms-3" disabled={processing}>
+                                            <Button variant={'destructive'} className="ms-3" disabled={processing}>
                                                 Remove Account
-                                            </DangerButton>
+                                            </Button>
                                         </div>
                                     </form>
-                                </Modal>
+                                </div>
                             )}
                         </React.Fragment>
                     )

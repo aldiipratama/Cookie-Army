@@ -14,10 +14,13 @@ import { ShowMore } from '@re-dev/react-truncate';
 import Loading from './ui/loading';
 import { useHomeContext } from '@/pages/Home';
 import TimeAgo from 'react-timeago'
+import { PhotoProvider, PhotoView } from 'react-photo-view';
 const EmojiPicker = lazy(() => import('emoji-picker-react'))
 
 export default function PostCard() {
     const { dataPosts } = useHomeContext()
+
+    console.log({dataPosts})
 
     return (
         <div className="flex flex-col items-center gap-2 px-5 mt-2">
@@ -100,7 +103,7 @@ export default function PostCard() {
                                     </Button>
                                 </div>
                                 <Button variant={'link'} className="h-full p-0 text-foreground">
-                                    {post.likes_count}
+                                    {post.likes_count} Likes
                                 </Button>
                                 <CardDescription className="w-full space-y-2">
                                     <Button variant={'link'} className="h-full p-0 w-max text-foreground">
@@ -116,8 +119,60 @@ export default function PostCard() {
                                     </ShowMore>
                                 </CardDescription>
                             </CardContent>
-                            <CardFooter className="flex flex-col p-2 pt-0 space-y-4">
-                                <CommentInput />
+                            <CardFooter className="flex flex-col p-2 pt-0">
+                                {
+                                    post.comments_count ? (
+                                        <Dialog>
+                                            <DialogTrigger asChild>
+                                                <Button variant={'link'} className='p-0 text-foreground'>
+                                                    See more {post.comments_count} comments
+                                                </Button>
+                                            </DialogTrigger>
+                                            <DialogContent className='p-0 overflow-hidden min-w-[90%] min-h-[80%]'>
+                                                <div className="flex gap-2">
+                                                    <img src="https://placehold.co/200" alt="img" />
+                                                    <div className="grid gap-2">
+                                                        <div className="flex items-center gap-2 py-2 h-max">
+                                                            <PhotoProvider maskOpacity={.75}>
+                                                                <PhotoView src={post.users.profile_picture}>
+                                                                    <Avatar className='cursor-pointer'>
+                                                                        <AvatarImage src={post.users.profile_picture} alt={post.users.profile_picture} />
+                                                                    </Avatar>
+                                                                </PhotoView>
+                                                            </PhotoProvider>
+                                                            <div className="flex flex-col w-ful">
+                                                                <div className="flex gap-2">
+                                                                    <Button variant={'link'} className="justify-start h-full p-0 text-foreground">{post.users.username}</Button>
+                                                                    {
+                                                                        post.users.verified_at && (
+                                                                            <BadgeCheckIcon className="text-blue-500 size-5" />
+                                                                        )
+                                                                    }
+                                                                    <Button variant={'link'}>
+                                                                        Follow +
+                                                                    </Button>
+                                                                </div>
+                                                                <span className="-mt-4 text-xs">
+                                                                    <TimeAgo date={post.created_at} />
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div className="flex gap-2">
+                                                            <PhotoProvider maskOpacity={.75}>
+                                                                <PhotoView src={post.users.profile_picture}>
+                                                                    <Avatar className='cursor-pointer'>
+                                                                        <AvatarImage src={post.users.profile_picture} alt={post.users.profile_picture} />
+                                                                    </Avatar>
+                                                                </PhotoView>
+                                                            </PhotoProvider>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </DialogContent>
+                                        </Dialog>
+                                    ) : null
+                                }
+                                <CommentInput comments_count={post.comments_count} />
                             </CardFooter>
                         </Card>
                     )) : (
@@ -128,7 +183,7 @@ export default function PostCard() {
     )
 }
 
-const CommentInput = () => {
+const CommentInput = ({ comments_count }: { comments_count: number }) => {
     const [comment, setComment] = useState<string>('')
     const { theme } = useTheme()
 
@@ -144,6 +199,7 @@ const CommentInput = () => {
 
     return (
         <div className="flex flex-col w-full">
+
             <form className="relative flex gap-2" onSubmit={handleSubmit}>
                 <Textarea placeholder="Write your commentar..." className="resize-none scrollbar-w-1 scrollbar scrollbar-thumb-foreground scrollbar-thumb-rounded-lg" value={comment}
                     onChange={(e) => setComment(e.target.value)} />

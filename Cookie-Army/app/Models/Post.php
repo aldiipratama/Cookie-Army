@@ -12,6 +12,10 @@ class Post extends Model
 
     protected $guarded = ['id'];
 
+    protected $with = ['users', 'comments'];
+
+    protected $withCount = ['likes', 'comments'];
+
     public function users()
     {
         return $this->belongsTo(User::class, 'userId');
@@ -19,7 +23,7 @@ class Post extends Model
 
     public function comments()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Comment::class, 'postId');
     }
 
     public function likes()

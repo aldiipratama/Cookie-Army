@@ -13,9 +13,9 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::orderBy("created_at","desc")->with('users')->withCount('likes')->paginate(10);
+        $posts = Post::orderBy("created_at","desc")->paginate(10);
         $stories = Story::orderBy('created_at','desc')->with('users')->paginate(10);
-        
+
         return \Inertia\Inertia::render('Home', [
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
