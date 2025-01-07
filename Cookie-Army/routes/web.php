@@ -14,6 +14,8 @@ Route::middleware(['web', 'check.password'])
                 );
         }
     );
+Route::get('/pdfs/{filename}', 'PdfReportPost@show')->middleware('auth');
+
 
 Route::get('book', function(){
     return Inertia\Inertia::render('Book/index');
