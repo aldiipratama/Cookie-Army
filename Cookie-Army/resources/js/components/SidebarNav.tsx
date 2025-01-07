@@ -107,7 +107,7 @@ const SidebarNav = () => {
                                 <TooltipTrigger>
                                     <SidebarMenuItem>
                                         <SidebarMenuButton className="hover:bg-accent" asChild>
-                                            <a href='#'>
+                                            <a href='/anime'>
                                                 <FolderClock />
                                                 <span>Movie Anime</span>
                                             </a>
@@ -122,7 +122,7 @@ const SidebarNav = () => {
                                 <TooltipTrigger>
                                     <SidebarMenuItem>
                                         <SidebarMenuButton className="hover:bg-accent" asChild>
-                                            <a href='#'>
+                                            <a href='/book'>
                                                 <Book />
                                                 <span>Read Book</span>
                                             </a>

@@ -35,7 +35,7 @@ const BookCard = ({
   </div>
 );
 
-export default function Home({ canLogin, canRegister }: Props) {
+export default function BookDetail({ canLogin, canRegister }: Props) {
   return (
     <HomeContext.Provider value={{ canLogin, canRegister }}>
       <Head title="Home" />

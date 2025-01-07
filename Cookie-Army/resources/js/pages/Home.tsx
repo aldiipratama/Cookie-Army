@@ -8,6 +8,7 @@ import { IHomeProps } from '@/types';
 export const HomeContext = createContext<IHomeProps>({
   canLogin: false,
   canRegister: false,
+  hasHome: false,
   dataPosts: {},
   dataStories: {},
 })
@@ -15,6 +16,7 @@ export const HomeContext = createContext<IHomeProps>({
 export default function Home({
   canLogin,
   canRegister,
+  hasHome,
   dataPosts,
   dataStories,
 }: IHomeProps) {
@@ -23,6 +25,7 @@ export default function Home({
   const contextData = {
     canLogin,
     canRegister,
+    hasHome,
     dataPosts,
     dataStories,
   }

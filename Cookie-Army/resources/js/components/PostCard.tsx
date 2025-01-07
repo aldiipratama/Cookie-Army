@@ -199,7 +199,6 @@ const CommentInput = ({ comments_count }: { comments_count: number }) => {
 
     return (
         <div className="flex flex-col w-full">
-
             <form className="relative flex gap-2" onSubmit={handleSubmit}>
                 <Textarea placeholder="Write your commentar..." className="resize-none scrollbar-w-1 scrollbar scrollbar-thumb-foreground scrollbar-thumb-rounded-lg" value={comment}
                     onChange={(e) => setComment(e.target.value)} />

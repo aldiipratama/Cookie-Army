@@ -100,6 +100,7 @@ interface IComments {
 interface IHomeProps {
     canLogin: boolean;
     canRegister: boolean;
+    hasHome: boolean;
     dataPosts?: {
         data?: IPosts[];
     } & IMeta,

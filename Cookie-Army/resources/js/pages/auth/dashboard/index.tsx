@@ -1,6 +1,7 @@
 import { Head } from '@inertiajs/react'
 import React from 'react'
 
+<<<<<<< HEAD
 
 
 const App = () => {
@@ -61,3 +62,15 @@ const App = () => {
 };
 
 export default App;
+=======
+const Dashboard = () => {
+  return (
+    <>
+      <Head title='Dashboard' />
+      Dashboard
+    </>
+  )
+}
+
+export default Dashboard
+>>>>>>> origin/frontend_yesi
