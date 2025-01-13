@@ -35,4 +35,22 @@ return [
         ],
     ],
 
+    'google' => [
+        'client_id'=> env('GOOGLE_ID'),
+        'client_secret' => env('GOOGLE_SECRET'),
+        'redirect' => env('GOOGLE_REDIRECT')
+    ],
+
+    'twitter' => [
+        'client_id'=> env('TWITTER_ID'),
+        'client_secret' => env('TWITTER_SECRET'),
+        'redirect' => env('TWITTER_REDIRECT')
+    ],
+
+    'tiktok' => [
+        'client_id'=> env('TIKTOK_ID'),
+        'client_secret' => env('TIKTOK_SECRET'),
+        'redirect' => env('TIKTOK_REDIRECT')
+    ]
+
 ];
