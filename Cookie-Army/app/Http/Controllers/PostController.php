@@ -2,26 +2,7 @@
 
 namespace App\Http\Controllers;
 
-<<<<<<< HEAD
-use App\Models\Post;
-use App\Models\Story;
-use Illuminate\Support\Facades\Route;
-
-class PostController extends Controller
-{
-    public function index()
-    {
-        $posts = Post::orderBy("created_at","desc")->paginate(10);
-        $stories = Story::orderBy('created_at','desc')->with('users')->paginate(10);
-
-        return \Inertia\Inertia::render('Home', [
-            'canLogin' => Route::has('login'),
-            'canRegister' => Route::has('register'),
-            'dataPosts' => $posts,
-            'dataStories' => $stories,
-        ]);
-    }
-=======
+use App\Http\Requests\PostCreateRequest;
 use App\Http\Requests\PostUpdateRequest;
 use Illuminate\Http\Request;
 use App\Models\Post;
@@ -29,9 +10,9 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        $post = Post::all();
+        $post = Post::orderBy("created_at","desc")->paginate(10);
 
         if (!$post) {
             return response()->json([
@@ -43,29 +24,26 @@ class PostController extends Controller
         }
 
 
-        return response()->json([
-            "data" => $post,
-            "status_code" => 200
-        ], 200);
+        return response()->json($post, 200);
     }
 
-    public function store(Request $request)
+    public function store(PostCreateRequest $request)
     {
-        $request->validated();
+        // dd($request);
+        $validatedData = $request->validated();
 
-        if ($request->hasFile('image')) {
-            $imageName = time().'.'.$request->image->extension();
-            $request->image->move(public_path('images'), $imageName);
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $validatedData['image'] = $request->file('image')->store('post-images', 'public');
         }
 
-       $post = Post::create([
-            'music' => $request->music,
-            'image' => $imageName,
-            'description' => $request->description,
-            'user_id' => Auth::user()->id,
+        Post::create([
+            'image' => $validatedData['image'],
+            'description' => $validatedData['description'],
+            'userId' => Auth::id(),
         ]);
 
-        return response()->json(['message' => 'Post created successfully'],201);}
+        return redirect()->intended(route('home'))->with(['message' => 'Post created successfully'], 201);
+    }
 
     public function show(Request $request)
     {
@@ -107,6 +85,4 @@ class PostController extends Controller
 
         return response()->noContent();
     }
-
->>>>>>> origin/backend_dicky
 }

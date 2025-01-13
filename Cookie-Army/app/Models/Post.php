@@ -28,6 +28,6 @@ class Post extends Model
 
     public function likes()
     {
-        return $this->hasMany(Like::class, 'postId');
+        return $this->hasMany(Like::class, 'entityId');
     }
 }

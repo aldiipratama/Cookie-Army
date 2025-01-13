@@ -5,29 +5,92 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogClose, DialogContent, DialogOverlay, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
-import { BadgeCheckIcon, Bookmark, Heart, MessageCircleMore, MoreHorizontal, Send, SendHorizonal, Smile } from "lucide-react";
+import { BadgeCheckIcon, Bookmark, Heart, Loader2, MessageCircleMore, MoreHorizontal, Send, SendHorizonal, Smile } from "lucide-react";
 import { Textarea } from "./ui/textarea";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { EmojiClickData, EmojiStyle, Theme } from 'emoji-picker-react';
 import { useTheme } from './ThemeProvider';
 import { ShowMore } from '@re-dev/react-truncate';
 import Loading from './ui/loading';
-import { useHomeContext } from '@/pages/Home';
 import TimeAgo from 'react-timeago'
 import { PhotoProvider, PhotoView } from 'react-photo-view';
+import { router, usePage } from '@inertiajs/react';
+import { ILikes, IPosts } from '@/types';
+import { useSweetAlert } from '@/hooks/use-sweetAlert';
+import { useToast } from '@/hooks/use-toast';
+import usePosts from '@/hooks/features/use-posts';
+import useLikes from '@/hooks/features/use-likes';
 const EmojiPicker = lazy(() => import('emoji-picker-react'))
 
 export default function PostCard() {
-    const { dataPosts } = useHomeContext()
+    const { auth } = usePage().props
+    const { modal } = useSweetAlert()
+    const toast = useToast()
+    const { data, isLoading, refetch: refetchPost } = usePosts()
+    const { data: dataLikes, refetch } = useLikes()
 
-    console.log({dataPosts})
+    const userLiked: ILikes[] = dataLikes?.data?.filter((like: ILikes) => like.userId === auth?.user?.id)
+
+    const handleClickReport = () => {
+        !auth.user && modal({
+            title: 'Your Not Logged In',
+            text: 'Please Login for report this post !',
+            confirmButtonText: 'Login',
+            showDenyButton: true,
+            denyButtonText: 'Register',
+            showCancelButton: true,
+            preConfirm() {
+                router.visit('login', {
+                    onStart: () => toast('Please wait, redirect to page login !', { type: 'info', autoClose: 800 })
+                })
+            },
+        })
+    }
+
+    const handleClickUnfollow = () => {
+        !auth.user && modal({
+            title: 'Are you sure ?',
+            text: 'Please confirm if sure to unfollow !',
+            showConfirmButton: false,
+            showDenyButton: true,
+            denyButtonText: 'Unfollow',
+            showCancelButton: true,
+        })
+    }
+
+    const handleClickLike = (postId?: number, commentId?: number) => {
+        if (!auth.user) {
+            modal({
+                title: 'Your Not Logged In',
+                text: 'Please Login for like this post !',
+                confirmButtonText: 'Login',
+                showDenyButton: true,
+                denyButtonText: 'Register',
+                showCancelButton: true,
+                preConfirm() {
+                    router.visit('login', {
+                        onStart: () => toast('Please wait, redirect to page login !', { type: 'info', autoClose: 800 })
+                    })
+                },
+            })
+        } else {
+            if (postId) {
+                refetch()
+                refetchPost()
+                router.post(route('like.post', postId))
+            }
+            if (commentId) router.post(route('like.comment', commentId))
+        }
+    }
 
     return (
         <div className="flex flex-col items-center gap-2 px-5 mt-2">
             {
-                dataPosts ?
-                    dataPosts?.data?.map((post, i) => (
-                        <Card key={i} className="w-full md:w-3/4 lg:w-2/3 xl:w-1/2">
+                isLoading ? (
+                    <Loader2 className='animate-spin' />
+                ) : data ?
+                    data.data?.map((post: IPosts) => (
+                        <Card key={post.id} className="w-full md:w-3/4 lg:w-2/3 xl:w-1/2">
                             <CardHeader className="flex-row items-center justify-start gap-2">
                                 <Avatar>
                                     <AvatarImage src={post.users.profile_picture} alt={post.users.profile_picture} />
@@ -46,19 +109,33 @@ export default function PostCard() {
                                 </span>
                                 <div className="ms-auto">
                                     <Dialog>
-                                        <DialogOverlay className="bg-black/[.01]" />
+                                        <DialogOverlay className="bg-black/[.01] z-10" />
                                         <DialogTrigger>
                                             <MoreHorizontal />
                                         </DialogTrigger>
                                         <DialogContent className="w-80">
                                             <DialogTitle className="sr-only">More Menu</DialogTitle>
-                                            <Button variant={'destructive'}>
-                                                Report
-                                            </Button>
-                                            <Button variant={'destructive'}>
-                                                Unfollow
-                                            </Button>
-                                            <Separator />
+                                            {
+                                                post.userId !== auth.user?.id && (
+                                                    <>
+                                                        <DialogClose asChild>
+                                                            <Button variant={'destructive'} onClick={handleClickReport}>
+                                                                Report
+                                                            </Button>
+                                                        </DialogClose>
+                                                        {
+                                                            auth.user && (
+                                                                <DialogClose asChild>
+                                                                    <Button variant={'destructive'} onClick={handleClickUnfollow}>
+                                                                        Unfollow
+                                                                    </Button>
+                                                                </DialogClose>
+                                                            )
+                                                        }
+                                                        <Separator />
+                                                    </>
+                                                )
+                                            }
                                             <Button variant={'ghost'}>
                                                 Add to Bookmark
                                             </Button>
@@ -84,12 +161,12 @@ export default function PostCard() {
                             </CardHeader>
                             <CardContent className="p-2 space-y-2">
                                 <AspectRatio ratio={1 / 1} className="-mt-4">
-                                    <img src={post.image} alt={post.image} className="h-full rounded-md" />
+                                    <img src={post.image.startsWith('http') ? post.image : `/storage/${post.image}`} alt={post.image} className="h-full rounded-md" />
                                 </AspectRatio>
                                 <div className="flex items-center justify-between">
                                     <div className="flex items-center">
-                                        <Button variant={'ghost'} size={'icon'}>
-                                            <Heart />
+                                        <Button variant={'ghost'} onClick={() => handleClickLike(post.id)} size={'icon'}>
+                                            <Heart className={userLiked?.find((like: ILikes) => like.entityId === post.id)?.entityId === post.id ? 'text-red-500' : ''} />
                                         </Button>
                                         <Button variant={'ghost'} size={'icon'}>
                                             <MessageCircleMore />
@@ -193,7 +270,6 @@ const CommentInput = ({ comments_count }: { comments_count: number }) => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
-        console.log('Submitted comment:', comment)
         setComment('')
     }
 

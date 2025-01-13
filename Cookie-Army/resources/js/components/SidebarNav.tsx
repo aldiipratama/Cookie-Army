@@ -1,6 +1,6 @@
-import { CSSProperties } from "react"
+import { CSSProperties, useState } from "react"
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarProvider, SidebarTrigger } from "./ui/sidebar"
-import { ActivitySquare, AlertTriangle, Book, FolderClock, Home, LogOut, MenuSquare, MessageSquare, PlusSquare, Search, User } from "lucide-react"
+import { ActivitySquare, AlertTriangle, Book, FolderClock, Home, LogOut, MenuSquare, MessageSquare, Search, User } from "lucide-react"
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover"
 import { Button } from "./ui/button"
 import { Label } from "./ui/label"
@@ -9,9 +9,13 @@ import { Link, usePage } from "@inertiajs/react"
 import { PopoverClose } from "@radix-ui/react-popover"
 import Logo from "./icon/Logo"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip"
+import CreatePost from "./CreatePost"
+import { useHomeContext } from "@/pages/Home"
 
 const SidebarNav = () => {
     const { auth } = usePage().props
+    const { url } = usePage()
+    const { canLogin, canRegister } = useHomeContext()
 
     return (
         <SidebarProvider className="hidden w-max md:block" style={{
@@ -57,7 +61,7 @@ const SidebarNav = () => {
                             <Tooltip>
                                 <TooltipTrigger>
                                     <SidebarMenuItem>
-                                        <SidebarMenuButton className="hover:bg-accent" asChild>
+                                        <SidebarMenuButton className={`hover:bg-accent ${url === '/' && 'bg-accent border-x border-primary'}`} asChild>
                                             <a href='/'>
                                                 <Home />
                                                 <span>Home</span>
@@ -86,27 +90,13 @@ const SidebarNav = () => {
                             </Tooltip>
                             {
                                 auth.user && (
-                                    <Tooltip>
-                                        <TooltipTrigger>
-                                            <SidebarMenuItem>
-                                                <SidebarMenuButton className="hover:bg-accent" asChild>
-                                                    <a href='#'>
-                                                        <PlusSquare />
-                                                        <span>Create Post</span>
-                                                    </a>
-                                                </SidebarMenuButton>
-                                            </SidebarMenuItem>
-                                        </TooltipTrigger>
-                                        <TooltipContent side="right" sideOffset={5} className="text-black dark:text-white bg-secondary">
-                                            <span>Create Post</span>
-                                        </TooltipContent>
-                                    </Tooltip>
+                                    <CreatePost />
                                 )
                             }
                             <Tooltip>
                                 <TooltipTrigger>
                                     <SidebarMenuItem>
-                                        <SidebarMenuButton className="hover:bg-accent" asChild>
+                                        <SidebarMenuButton className={`hover:bg-accent ${url === '/anime' && 'bg-accent border-x border-primary'}`} asChild>
                                             <a href='/anime'>
                                                 <FolderClock />
                                                 <span>Movie Anime</span>
@@ -121,7 +111,7 @@ const SidebarNav = () => {
                             <Tooltip>
                                 <TooltipTrigger>
                                     <SidebarMenuItem>
-                                        <SidebarMenuButton className="hover:bg-accent" asChild>
+                                        <SidebarMenuButton className={`hover:bg-accent ${url === '/book' && 'bg-accent border-x border-primary'}`} asChild>
                                             <a href='/book'>
                                                 <Book />
                                                 <span>Read Book</span>
@@ -139,7 +129,7 @@ const SidebarNav = () => {
                                         <Tooltip>
                                             <TooltipTrigger>
                                                 <SidebarMenuItem>
-                                                    <SidebarMenuButton className="hover:bg-accent" asChild>
+                                                    <SidebarMenuButton className={`hover:bg-accent ${url === '/chat' && 'bg-accent border-x border-primary'}`} asChild>
                                                         <Link href={route('chat')}>
                                                             <MessageSquare />
                                                             <span>Messages</span>
@@ -186,6 +176,16 @@ const SidebarNav = () => {
 
                                             <PopoverContent side="right" align="end" className="flex flex-col gap-2 w-max">
                                                 {
+                                                    auth.user.roleId === 1 && (
+                                                        <Button variant={'ghost'} className="justify-start" asChild>
+                                                            <Link href={route('dashboard')}>
+                                                                <ActivitySquare />
+                                                                <span>Dashboard</span>
+                                                            </Link>
+                                                        </Button>
+                                                    )
+                                                }
+                                                {
                                                     auth.user && (
                                                         <Button variant={'ghost'} className="justify-start">
                                                             <ActivitySquare />
@@ -204,19 +204,22 @@ const SidebarNav = () => {
                                                     </Label>
                                                 </Button>
                                                 {
-                                                    !auth.user && (
-                                                        <>
-                                                            <Button asChild className="lg:hidden">
-                                                                <Link href={route('login')}>Login</Link>
-                                                            </Button>
-                                                            <Button asChild className="lg:hidden">
-                                                                <Link href={route('register')}>Register</Link>
-                                                            </Button>
-                                                        </>
-                                                    )
-                                                }
-                                                {
-                                                    auth.user && (
+                                                    !auth.user ? (
+                                                        canLogin && (
+                                                            <>
+                                                                <Button asChild className="lg:hidden">
+                                                                    <Link href={route('login')}>Login</Link>
+                                                                </Button>
+                                                                {
+                                                                    canRegister && (
+                                                                        <Button asChild className="lg:hidden">
+                                                                            <Link href={route('register')}>Register</Link>
+                                                                        </Button>
+                                                                    )
+                                                                }
+                                                            </>
+                                                        )
+                                                    ) : (
                                                         <PopoverClose asChild>
                                                             <Button variant={'ghost'} className="justify-start" asChild>
                                                                 <Link href={route('logout')} method="post">

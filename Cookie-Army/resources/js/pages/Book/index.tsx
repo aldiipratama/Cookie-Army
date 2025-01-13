@@ -57,7 +57,7 @@ export default function BookDetail({ canLogin, canRegister }: Props) {
             <div className="grid items-center grid-cols-1 gap-6 md:grid-cols-2">
               <img
                 className="w-full rounded-lg"
-                src="/new-release-cover.jpg"
+                src={`https://picsum.photos/200/200?random=book1`}
                 alt="New Release"
               />
               <div>
@@ -93,22 +93,22 @@ export default function BookDetail({ canLogin, canRegister }: Props) {
               <BookCard
                 title="The Having"
                 description="Lorem Ipsum is simply dummy text..."
-                image="/book1.jpg"
+                image="https://picsum.photos/200/200?random=book2"
               />
               <BookCard
                 title="The Bookish Life"
                 description="Lorem Ipsum is simply dummy text..."
-                image="/book2.jpg"
+                image="https://picsum.photos/200/200?random=book3"
               />
               <BookCard
                 title="Factfulness"
                 description="Lorem Ipsum is simply dummy text..."
-                image="/book3.jpg"
+                image="https://picsum.photos/200/200?random=book4"
               />
               <BookCard
                 title="Crossing to Safety"
                 description="Lorem Ipsum is simply dummy text..."
-                image="/book4.jpg"
+                image="https://picsum.photos/200/200?random=book5"
               />
             </div>
           </section>
@@ -130,22 +130,22 @@ export default function BookDetail({ canLogin, canRegister }: Props) {
               <BookCard
                 title="The GoldFinch"
                 description="Lorem Ipsum is simply dummy text..."
-                image="/book5.jpg"
+                image="https://picsum.photos/200/200?random=book6"
               />
               <BookCard
                 title="Steal Like An Artist"
                 description="Lorem Ipsum is simply dummy text..."
-                image="/book6.jpg"
+                image="https://picsum.photos/200/200?random=book7"
               />
               <BookCard
                 title="Vampire Diaries"
                 description="Lorem Ipsum is simply dummy text..."
-                image="/book7.jpg"
+                image="https://picsum.photos/200/200?random=book8"
               />
               <BookCard
                 title="Wager"
                 description="Lorem Ipsum is simply dummy text..."
-                image="/book8.jpg"
+                image="https://picsum.photos/200/200?random=book9"
               />
             </div>
           </section>

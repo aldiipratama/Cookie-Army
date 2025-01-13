@@ -20,8 +20,6 @@ class LikeFactory extends Factory
     public function definition(): array
     {
         return [
-            'commentId' => Comment::inRandomOrder()->first()->id,
-            'postId' => Post::inRandomOrder()->first()->id,
             'userId' => User::inRandomOrder()->first()->id,
         ];
     }

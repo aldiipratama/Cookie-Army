@@ -12,18 +12,15 @@ class Like extends Model
 
     protected $guarded = ['id'];
 
-    public function comments()
-    {
-        return $this->belongsTo(Comment::class, 'commentId');
-    }
-
-    public function posts()
-    {
-        return $this->belongsTo(Post::class, 'postId');
-    }
+    protected $with = ['users'];
 
     public function users()
     {
         return $this->belongsTo(User::class, 'userId');
+    }
+
+    public function entity()
+    {
+        return $this->morphTo(null, 'entity_type', 'entityId');
     }
 }

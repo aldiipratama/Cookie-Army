@@ -24,9 +24,8 @@ class PostUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "description" => ["string", 'max:50'],
+            "description" => ["string", 'min:1'],
             "image"=>File::image()->min(1024)->max(5 * 1024)->dimensions(Rule::dimensions()->minWidth(150)->minHeight(150)->maxWidth(1280)->maxHeight(1280)),
-            "music"=>["string"]
         ];
     }
 }

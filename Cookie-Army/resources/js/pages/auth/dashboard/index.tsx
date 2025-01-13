@@ -1,76 +1,116 @@
-import { Head } from '@inertiajs/react'
-import React from 'react'
+import { ChartArea } from "@/components/ui/area-chart";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { ChartBar } from "@/components/ui/bar-chart";
+import { Button } from "@/components/ui/button";
+import { DropdownMenu, DropdownMenuItem } from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
+import { ChartPie } from "@/components/ui/pie-chart";
+import DashboardLayout from "@/layouts/DashboardLayout";
+import { Head, Link, usePage } from "@inertiajs/react";
+import { DropdownMenuContent, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
+import { Bell, ChevronDown, User } from "lucide-react";
 
-<<<<<<< HEAD
+const MainDashboard = () => {
+  const { auth } = usePage().props
 
-
-const App = () => {
   return (
-    <div className="flex">
-      {/* Sidebar */}
-      <div className="flex flex-col w-64 h-screen p-4 text-gray-300 bg-gray-800">
-        <h1 className="mb-6 text-xl font-bold text-white">ShareFly</h1>
-        <nav className="flex flex-col gap-4">
-          <a href="#" className="text-yellow-400 hover:text-white">
-            Overview
-          </a>
-          <a href="#" className="hover:text-yellow-400">Posts</a>
-          <a href="#" className="hover:text-yellow-400">Report</a>
-          <a href="#" className="hover:text-yellow-400">Message</a>
-          <a href="#" className="hover:text-yellow-400">Statistic</a>
-          <a href="#" className="hover:text-yellow-400">Setting</a>
-        </nav>
-      </div>
-
-      {/* Dashboard Post */}
-      <div className="flex-1 p-6 text-gray-300 bg-gray-900">
-        <h2 className="mb-4 text-2xl font-bold text-white">Dashboard Post</h2>
-        <table className="w-full border border-collapse border-gray-700 table-auto">
-          <thead>
-            <tr className="bg-gray-800">
-              <th className="px-4 py-2 border border-gray-700">ID</th>
-              <th className="px-4 py-2 border border-gray-700">Title</th>
-              <th className="px-4 py-2 border border-gray-700">Slug</th>
-              <th className="px-4 py-2 border border-gray-700">Description</th>
-              <th className="px-4 py-2 border border-gray-700">Create Date</th>
-              <th className="px-4 py-2 border border-gray-700">Edit</th>
-            </tr>
-          </thead>
-          <tbody>
-            {[...Array(8)].map((_, index) => (
-              <tr key={index} className="hover:bg-gray-800">
-                <td className="px-4 py-2 text-center border border-gray-700">{index + 1}</td>
-                <td className="px-4 py-2 border border-gray-700"></td>
-                <td className="px-4 py-2 border border-gray-700"></td>
-                <td className="px-4 py-2 border border-gray-700"></td>
-                <td className="px-4 py-2 border border-gray-700"></td>
-                <td className="px-4 py-2 text-center border border-gray-700">
-                  <button className="mr-2 text-green-500 hover:text-green-400">
-                    <i className="fas fa-edit"></i> 🖉
-                  </button>
-                  <button className="text-red-500 hover:text-red-400">
-                    <i className="fas fa-trash"></i> 🗑
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <>
+      <Head title="Dashboard Post" />
+      <DashboardLayout>
+        <div className="items-center flex-1 p-5 space-y-4 text-gray-300 h-max">
+          <div className="flex items-center justify-between">
+            <h2 className="text-2xl font-bold text-white">Overview</h2>
+            <div className="flex items-center gap-5">
+              <form action="">
+                <Input className="border-foreground" placeholder="Search..." />
+              </form>
+              <DropdownMenu>
+                <DropdownMenuTrigger className="flex justify-between gap-2 p-2 border rounded-lg border-foreground">
+                  <Avatar>
+                    <AvatarImage src={auth?.user?.profile_picture} />
+                  </Avatar>
+                  <div className="grid text-left">
+                    <span>{auth?.user?.firstname} {auth?.user?.lastname}</span>
+                    <span className="text-xs">{auth?.user?.role?.name}</span>
+                  </div>
+                  <Button variant={'ghost'} size={'icon'}>
+                    <ChevronDown />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="border border-white bg-gray-900 rounded-lg w-36 mt-0.5 overflow-hidden p-2">
+                  <DropdownMenuItem asChild>
+                    <Link href={route('profile')}>
+                      Profile
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    Logout
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+          </div>
+          <div className="flex justify-between gap-2">
+            <div className="flex items-center justify-between flex-1 p-2 border rounded-lg border-foreground">
+              <div className="grid">
+                <span>Total User</span>
+                <span>13.000</span>
+              </div>
+              <div className="grid gap-2">
+                <User className="mx-auto" />
+                <span className="text-xs text-green-500">+2.51%</span>
+              </div>
+            </div>
+            <div className="flex items-center justify-between flex-1 p-2 border rounded-lg border-foreground">
+              <div className="grid">
+                <span>Total Post</span>
+                <span>13.000</span>
+              </div>
+              <div className="grid gap-2">
+                <User className="mx-auto" />
+                <span className="text-xs text-green-500">+2.51%</span>
+              </div>
+            </div>
+            <div className="flex items-center justify-between flex-1 p-2 border rounded-lg border-foreground">
+              <div className="grid">
+                <span>Total Like</span>
+                <span>13.000</span>
+              </div>
+              <div className="grid gap-2">
+                <User className="mx-auto" />
+                <span className="text-xs text-green-500">+2.51%</span>
+              </div>
+            </div>
+            <div className="flex items-center justify-between flex-1 p-2 border rounded-lg border-foreground">
+              <div className="grid">
+                <span>Total Comment</span>
+                <span>13.000</span>
+              </div>
+              <div className="grid gap-2">
+                <User className="mx-auto" />
+                <span className="text-xs text-green-500">+2.51%</span>
+              </div>
+            </div>
+            <div className="flex items-center justify-between flex-1 p-2 border rounded-lg border-foreground">
+              <div className="grid">
+                <span>Total Share</span>
+                <span>13.000</span>
+              </div>
+              <div className="grid gap-2">
+                <User className="mx-auto" />
+                <span className="text-xs text-green-500">+2.51%</span>
+              </div>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            <ChartArea />
+            <ChartBar />
+            <ChartPie />
+          </div>
+        </div>
+      </DashboardLayout>
+    </>
   );
 };
 
-export default App;
-=======
-const Dashboard = () => {
-  return (
-    <>
-      <Head title='Dashboard' />
-      Dashboard
-    </>
-  )
-}
-
-export default Dashboard
->>>>>>> origin/frontend_yesi
+export default MainDashboard;

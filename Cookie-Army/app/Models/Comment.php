@@ -23,4 +23,9 @@ class Comment extends Model
     {
         return $this->belongsTo(Post::class, 'postId');
     }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class, 'entityId');
+    }
 }

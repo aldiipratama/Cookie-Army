@@ -31,13 +31,24 @@ export interface User {
     email_verified_at: DateTime;
     verified_at: DateTime;
     banned_at: DateTime;
+    no_telepon: string;
     profile_picture: string;
     profile_background: string;
     created_at: DateTime;
     updated_at: DateTime;
+    roleId: number;
+    role: IRole;
 }
 
-interface IMeta {
+interface IRole {
+    id: number;
+    name: string;
+    created_at: DateTime;
+    Updated_at: DateTime;
+}
+
+interface IMeta<T> {
+    data?: T[];
     current_page?: number;
     first_page_url?: string;
     from?: number;
@@ -81,9 +92,9 @@ interface IStories {
 
 interface ILikes {
     id: number;
-    commentId: number;
-    postId: number;
     userId: number;
+    entityId: number;
+    entity_type: string;
     created_at: DateTime;
     updated_at: DateTime;
 }
@@ -101,12 +112,6 @@ interface IHomeProps {
     canLogin: boolean;
     canRegister: boolean;
     hasHome: boolean;
-    dataPosts?: {
-        data?: IPosts[];
-    } & IMeta,
-    dataStories?: {
-        data?: IStories[];
-    } & IMeta
 }
 
 export type PageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & {

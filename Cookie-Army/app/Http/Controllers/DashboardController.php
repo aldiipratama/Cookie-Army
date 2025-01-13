@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -12,6 +14,22 @@ class DashboardController extends Controller
     public function index()
     {
         return \Inertia\Inertia::render('auth/dashboard/index');
+    }
+
+    public function posts()
+    {
+        $posts = Post::orderBy('created_at','desc')->paginate(10);
+        return \Inertia\Inertia::render('auth/dashboard/posts/index', [
+            'posts' => $posts
+        ]);
+    }
+
+    public function users()
+    {
+        $users = User::orderBy('created_at','desc')->paginate(10);
+        return \Inertia\Inertia::render('auth/dashboard/users/index', [
+            'users' => $users
+        ]);
     }
 
     /**
@@ -57,8 +75,17 @@ class DashboardController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function deletePost(string $id)
     {
-        //
+        Post::destroy($id);
+
+        return redirect()->route('dashboard.posts')->with('success','Delete Post Success');
+    }
+
+    public function deleteUser(string $id)
+    {
+        User::destroy($id);
+
+        return redirect()->route('dashboard.users')->with('success','Delete User Success');
     }
 }

@@ -12,6 +12,8 @@ class Story extends Model
 
     protected $guarded = ["id"];
 
+    protected $with = ['users'];
+
     public function users()
     {
         return $this->belongsTo(User::class, 'userId');

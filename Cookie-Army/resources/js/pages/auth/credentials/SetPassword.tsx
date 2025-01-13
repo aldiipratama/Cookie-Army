@@ -6,16 +6,10 @@ import { useToast } from '@/hooks/use-toast';
 import { Head, useForm } from '@inertiajs/react';
 import React, { FormEventHandler, useEffect } from 'react'
 
-<<<<<<< HEAD
 const SetPassword = ({ message, userId }: { message: string, userId: number }) => {
     const toast = useToast()
     const { data, setData, processing, errors, reset, patch } = useForm({
         userId,
-=======
-const SetPassword = ({ message }: { message: string }) => {
-    const toast = useToast()
-    const { data, setData, post, processing, errors, reset } = useForm({
->>>>>>> origin/frontend_yesi
         password: '',
         password_confirmation: '',
     });
@@ -23,11 +17,7 @@ const SetPassword = ({ message }: { message: string }) => {
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
-<<<<<<< HEAD
         patch(route('auth.create-password'), {
-=======
-        post(route('auth.create-password'), {
->>>>>>> origin/frontend_yesi
             onFinish: () => reset('password'),
             onStart: () => toast('Wait for checking LoggedIn!', { type: 'info' }),
             onError: () => toast('Login Failed', { type: 'error' }),
@@ -46,11 +36,7 @@ const SetPassword = ({ message }: { message: string }) => {
     return (
         <>
             <Head title='Set Password' />
-<<<<<<< HEAD
             <div className="flex items-center justify-center h-screen">
-=======
-            <div className="flex h-screen justify-center items-center">
->>>>>>> origin/frontend_yesi
                 <Card className='w-96'>
                     <CardHeader>
                         <CardTitle>
@@ -58,10 +44,7 @@ const SetPassword = ({ message }: { message: string }) => {
                         </CardTitle>
                     </CardHeader>
                     <form onSubmit={submit}>
-<<<<<<< HEAD
                         <Input type='hidden' value={data.userId} name='userId' />
-=======
->>>>>>> origin/frontend_yesi
                         <CardContent>
                             <div className="grid gap-2">
                                 <Label htmlFor='password'>Password</Label>

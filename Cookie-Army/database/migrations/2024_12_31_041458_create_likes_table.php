@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('likes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('commentId')->constrained('comments', 'id')->onDelete('CASCADE');
-            $table->foreignId('postId')->constrained('posts', 'id')->onDelete('CASCADE');
             $table->foreignId('userId')->constrained('users', 'id')->onDelete('CASCADE');
+            $table->integer('entityId');
+            $table->enum('entity_type', ['post', 'comment']);
             $table->timestamps();
         });
     }

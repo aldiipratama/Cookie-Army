@@ -9,7 +9,6 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -89,17 +88,5 @@ Route::middleware('auth')
                     Route::get('set-password', 'setPassword')->name('auth.set-password');
                     Route::patch('set-password', 'createPassword')->name('auth.create-password');
                 });
-        }
-    );
-
-Route::middleware(['auth', 'verified', 'admin'])
-    ->group(
-        function () {
-            Route::controller(DashboardController::class)
-                ->group(
-                    function () {
-                        Route::get('dashboard', 'index')->name('dashboard');
-                    }
-                );
         }
     );

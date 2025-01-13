@@ -18,7 +18,6 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
-            'slug' => fake()->slug(),
             'description' => fake()->realText(),
             'image' => 'https://picsum.photos/640/480?random=image-post'. random_int(1, 100),
             'userId' => User::factory()
